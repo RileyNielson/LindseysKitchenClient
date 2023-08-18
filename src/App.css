@@ -161,7 +161,7 @@ h1 {
   
 }
 
-#ingredients {
+.createText {
   width: 100%;
   height: 300px;
   border: 2px solid teal;
@@ -200,6 +200,36 @@ h1 {
   font-size: 30px;
   margin: 10px;
   margin-bottom: 40px;
+}
+
+
+#recipeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#recipeContainer img {
+  margin-top: 80px;
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+}
+
+#recipeContainer div {
+  border: 2px solid #282c34;
+  border-radius: 5px;
+  height: fit-content;
+  width: 80%;
+}
+
+#recipeContainer div h3 {
+  border-bottom: 1px solid #282c34;
+}
+
+#recipeContainer h3{
+  margin: 0;
 }
 
 .foot {
