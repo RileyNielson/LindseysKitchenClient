@@ -1,0 +1,42 @@
+#searchInput {
+    height: 30px;
+    width: 100%;
+    font-size: 20px;
+    outline: none;
+    border: 0;
+}
+
+#searchContents {
+    position: absolute;
+    z-index: 11;
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(101, 121, 121);
+    color: #5e5e5e;
+    margin-left: 2px;
+}
+
+.searchItem {
+    background-color: white;
+    font-size: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.searchItem:hover {
+    cursor: pointer;
+    background-color: #ededed;
+}
+
+.searchImg {
+    height: 45px;
+    width: 60px;
+    object-fit: cover;
+}
+
+.searchLabel {
+    margin-left: 5px;
+}

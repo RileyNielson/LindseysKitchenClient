@@ -1,62 +1,80 @@
-import React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
+import React, { useState } from "react";
+import "./searchBar.css";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import { useNavigate } from "react-router-dom";
 
+function SearchBar(props) {
+  const [searchVal, setSearchVal] = useState("");
+  const [searchRec, setSearchRec] = useState([]);
+  const navigate = useNavigate();
 
-function SearchBar() {
-
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
+  const searchRecipes = JSON.parse(JSON.stringify(props.recipes)).map((sr) => ({
+    id: sr._id,
+    label: sr.title,
+    photo: sr.photos,
   }));
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
+  function changeSearch(e) {
+    setSearchVal(e.target.value.toLowerCase());
+    if (e.target.value === "") {
+      setSearchRec(searchRecipes);
+    } else {
+      setSearchRec(
+        searchRecipes.filter((fr) => {
+          return (
+            typeof fr.label == "string" &&
+            fr.label.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1
+          );
+        })
+      );
+    }
+  }
 
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
+  function searchClick(e, id) {
+    const item = JSON.parse(JSON.stringify(props.recipes)).filter(
+      (r) => r._id === id
+    );
+    console.log(e.id);
+    props.setRecipe(item[0]);
+    setSearchRec(searchRecipes);
+    document.getElementById("searchContents").classList.add("hidden");
+    document.getElementById("searchInput").placeholder = "Search..."
+    navigate("/recipe");
+  }
+
+  function openSearch(e) {
+    e.target.placeholder = ""
+    document.getElementById("searchContents").classList.toggle("hidden");
+  }
+
+  document.addEventListener("mouseup", function (e) {
+    var container = document.getElementById("searchContents");
+    if (!container.contains(e.target)) {
+      container.classList.add("hidden");
+      document.getElementById("searchInput").placeholder = "Search..."
+    }
+  });
+
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
+    <div id="searchBar">
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={changeSearch}
+        onClick={openSearch}
+        id="searchInput"
+      ></input>
+      <div id="searchContents" >
+        {searchRec.map((r) => (
+          <div className="searchItem" onClick={(e) => searchClick(e, r.id)}>
+            <img className="searchImg" src={r.photo} />
+            <p className="searchLabel">{r.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

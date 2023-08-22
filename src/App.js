@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import HeaderBar from "./components/header";
 import Home from "./components/home";
 import Create from "./components/create";
@@ -7,43 +7,62 @@ import "./App.css";
 import Recipe from "./components/recipe";
 
 function App() {
-  const [recipe, setRecipe] = useState()
+  const [recipe, setRecipe] = useState();
+  const [chosenFilter, setChosenFilter] = useState("ShowAll");
+  const [recipes, setRecipes] = useState([]);
   const catagories = [
     "Appetizers",
-    "Bars & Brownies",
-    "Beef",
     "Beverages",
     "Bread",
     "Breakfast",
-    "Cake",
-    "Canning & Leather",
-    "Cheesecake",
-    "Cookies",
+    "Poultry",
+    "Beef",
+    "Pork",
     "Fish",
+    "Pasta",
+    "Other Main Dishes",
+    "Soup",
+    "Salad",
+    "Sides & Veggies",
+    "Sauces & Marinades",
+    "Cookies",
+    "Bars & Brownies",
+    "Cake",
     "Frosting",
+    "Cheesecake",
+    "Pie",
+    "Pastry",
     "Ice Cream",
     "Other Desserts",
-    "Other Main Dishes",
-    "Pasta",
-    "Pastry",
-    "Pie",
-    "Pork",
-    "Poultry",
-    "Salad",
-    "Sauces & Marinades",
-    "Sides & Veggies",
     "Snacks",
-    "Soup",
+    "Canning & Leather",
+    "All",
   ];
 
+  const tags = [
+    "Sweet",
+    "Savory",
+  ]
 
   return (
     <div id="App">
-      <HeaderBar />
+      <HeaderBar recipes={recipes} setRecipe={setRecipe} setChosenFilter={setChosenFilter} />
       <Routes>
-        <Route index element={<Home setRecipe={setRecipe} catagories={catagories}/>} />
-        <Route path="/create" element={<Create catagories={catagories}/>} />
-        <Route path="/recipe" element={<Recipe recipe={recipe}/>} />
+        <Route
+          index
+          element={
+            <Home
+              recipes={recipes}
+              setRecipes={setRecipes}
+              setRecipe={setRecipe}
+              catagories={catagories}
+              chosenFilter={chosenFilter}
+              setChosenFilter={setChosenFilter}
+            />
+          }
+        />
+        <Route path="/create" element={<Create catagories={catagories} />} />
+        <Route path="/recipe" element={<Recipe recipe={recipe} />} />
       </Routes>
     </div>
   );

@@ -1,130 +1,51 @@
 import * as React from "react";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function TitlebarImageList(props) {
-  const [columnNumber, setColumnNumber] = React.useState(4);
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    function handleResize() {
-      // console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
-      var box = document.querySelector("#cardContainer");
-      var width = box.offsetWidth;
-      setColumnNumber(Math.floor(width / 350));
-    }
+  var showingCatagories = props.showCatagories.filter((c) => c.length > 0);
 
-    window.addEventListener("resize", handleResize);
-  });
-
-  function handleClick(item) {
-    props.setRecipe(item);
+  if (props.chosenFilter !== "ShowAll") {
+    showingCatagories = props.showCatagories;
   }
 
-  return (<div id="cardContainer">
-    <ImageList sx={{ width: "80%", height: "auto", paddingTop: "30px" }}>
-      <ImageListItem key="Subheader" cols={columnNumber}></ImageListItem>
-      {props.recipes.map((item) => (
-        <NavLink className="linkRecipe" to="/recipe">
-          <ImageListItem key={item.photos} sx={{ maxWidth: "300px" }}>
-            <img
-              src={"data:image/png;base64," + item.photos}
-              alt={item.title}
-              loading="lazy"
-              onClick={() => handleClick(item)}
-            />
-            <ImageListItemBar
-              title={item.title}
-              subtitle={item.author}
-              actionIcon={
-                <IconButton
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${item.title}`}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        </NavLink>
+  function handleClick(item) {
+    console.log(item);
+
+    if (props.chosenFilter === "ShowAll") {
+      props.setChosenFilter(() => {
+        // document.querySelector("#cardContainer").scrollTo(0, 0);
+        // document.getElementById("cardContainer").style.overflow = "hidden";
+        // document.querySelector("#loadCircle").classList.remove("hidden");
+        return item.title;
+      });
+    } else {
+      showingCatagories = props.showCatagories;
+      props.setRecipe(() => {
+        navigate("/recipe");
+        return item;
+      });
+    }
+  }
+
+  return (
+    <div id="cardContainer" className="cardContainer">
+      <div id="topBorder"></div>
+      {showingCatagories.map((item) => (
+        <div className="card">
+          <img
+            src={item.photos}
+            alt={item.title}
+            loading="lazy"
+            onClick={() => handleClick(item)}
+          />
+          <div id="imageLabel">
+            <p>{item.title}</p>
+            <p>{item.length}</p>
+          </div>
+        </div>
       ))}
-    </ImageList></div>
+    </div>
   );
 }
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-    author: "@rollelflex_graphy726",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-    author: "@helloimnik",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-    author: "@nolanissac",
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-    author: "@hjrc33",
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-    author: "@arwinneil",
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-    author: "@tjdragotta",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-    author: "@katie_wasserman",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-    author: "@silverdalex",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-    author: "@shelleypauls",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-    author: "@peterlaster",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-    author: "@southside_customs",
-    cols: 2,
-  },
-];

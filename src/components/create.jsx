@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import CatagoryInput from "./catagoryInput";
+import stockImage from "./stockImage";
 
 function Create(props) {
   const [recipe, setRecipe] = useState({
@@ -11,8 +12,9 @@ function Create(props) {
     ingredients: "",
     instructions: "",
     notes: "",
-    photos: "",
+    photos: stockImage,
   });
+  const [idMessage, setIdMessage] = useState("Click Me To Upload Image");
 
   const navigate = useNavigate();
 
@@ -58,12 +60,47 @@ function Create(props) {
 
   let base64String = "";
 
+  function handlePaste(event) {
+    const clipboardItems = event.clipboardData.items;
+    const items = [].slice.call(clipboardItems).filter(function (item) {
+      // Filter the image items only
+      return /^image\//.test(item.type);
+    });
+    if (items.length === 0) {
+      event.target.value = "";
+      return;
+    }
+    const item = items[0];
+    if (item.kind === "file") {
+      var blob = item.getAsFile();
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        console.log(event.target.result);
+        base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+
+        //imageBase64Stringsep = base64String;
+
+        // alert(imageBase64Stringsep);
+        console.log(base64String);
+
+        return setRecipe((prev) => {
+          return { ...prev, photos: "data:image/png;base64," +base64String };
+        });
+      };
+      // data url!
+      reader.readAsDataURL(blob);
+      event.target.value = "Image Added";
+      setIdMessage("Image Added");
+    }
+    
+  }
+
   function imageUploaded(e) {
-    let file = document.querySelector(
-      'input[type=file]')['files'][0];
+    let file = document.querySelector("input[type=file]")["files"][0];
 
     let reader = new FileReader();
-    console.log(file);
+    console.log(file.name);
+    setIdMessage("Image " + file.name + " Added");
 
     reader.onload = function () {
       base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
@@ -73,13 +110,12 @@ function Create(props) {
       // alert(imageBase64Stringsep);
       console.log(base64String);
       return setRecipe((prev) => {
-        return { ...prev, photos: base64String };
+        return { ...prev, photos: "data:image/png;base64," + base64String };
       });
     };
     reader.readAsDataURL(file);
 
     console.log(base64String);
-    
   }
 
   return (
@@ -100,7 +136,11 @@ function Create(props) {
           </div>
           <div className="spacer">
             <p className="tag">Categories</p>
-            <CatagoryInput catagoryValues={recipe.catagories} catagories={props.catagories} setRecipe={setRecipe}/>
+            <CatagoryInput
+              catagoryValues={recipe.catagories}
+              catagories={props.catagories}
+              setRecipe={setRecipe}
+            />
           </div>
           <div className="spacer">
             <p className="tag">Source</p>
@@ -165,15 +205,22 @@ function Create(props) {
           </div>
           <div id="addDirections">
             <p style={{ margin: 0, marginTop: 10, marginBottom: 10 }}>Photos</p>
-            <input
-              id="fileId"
-              className="createText"
-              type="file"
-              name="photos"
-              src=""
-              alt=""
-              onChange={(event) => imageUploaded(event)}
-            />
+            <div className="createText">
+              <input
+                id="fileId"
+                type="file"
+                name="photos"
+                style={{ display: "none" }}
+                onChange={(event) => imageUploaded(event)}
+              />
+              <label for="fileId">{idMessage}</label>
+              <input
+                placeholder="ctrl + v to paste image"
+                type="text"
+                id="pasteImage"
+                onPaste={handlePaste}
+              ></input>
+            </div>
           </div>
         </div>
         <div id="buttonDiv">

@@ -1,43 +1,92 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import PrintIcon from "@mui/icons-material/Print";
+import { useNavigate } from "react-router";
 
 function Recipe(props) {
-  const recipe = props.recipe;
-  const ingredients = recipe.ingredients.split(/\r?\n|\r|\n/g);
-  const instructions = recipe.instructions.split(/\r?\n|\r|\n/g);
-  const notes = recipe.notes.split(/\r?\n|\r|\n/g);
+  const navigate = useNavigate();
 
-  return (
-    <div id="recipeContainer">
-      <img src={"data:image/png;base64," + recipe.photos} alt={recipe.title} />
-      <h2>{recipe.title}</h2>
-      <h3>Source: {recipe.source}</h3>
-      <h3>Servings: {recipe.servings}</h3>
-      <div>
-        <h3>Ingredients</h3>
-        <ul>
-          {ingredients.map((i) => (
-            <li>{i}</li>
-          ))}
-        </ul>
+  useEffect(() => {
+    if (props.recipe === undefined) {
+      navigate("/");
+    }
+  });
+
+  console.log(props.recipe);
+
+  if (props.recipe !== undefined) {
+    const recipe = props.recipe;
+    const ingredients = recipe.ingredients.split(/\r?\n|\r|\n/g);
+    const instructions = recipe.instructions.split(/\r?\n|\r|\n/g);
+    const notes = recipe.notes.split(/\r?\n|\r|\n/g);
+
+    var source = recipe.source;
+
+    var inputElement = document.createElement("input");
+    inputElement.type = "url";
+    inputElement.value = source;
+
+    if (inputElement.checkValidity()) {
+      source = <a href={source} target="_blank">{source}</a>;
+    }
+
+    function backFunction() {
+      navigate("/");
+    }
+
+    function printFunction() {
+      window.print();
+    }
+
+    return (
+      <div id="recipeDisplay">
+        <div id="recipeContainer">
+          <img src={recipe.photos} alt={recipe.title} />
+          <h2>{recipe.title}</h2>
+          <h3>Source: {source}</h3>
+          <h3>Servings: {recipe.servings}</h3>
+          <div>
+            <h3>Ingredients</h3>
+            <ul
+              id="ingredients"
+              style={{ columns: ingredients.length > 7 ? 2 : 1 }}
+            >
+              {ingredients.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3>Instructions</h3>
+            <ol>
+              {instructions.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ol>
+          </div>
+          <div>
+            <h3>Notes</h3>
+            <ul>
+              {notes.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="foot"></div>
+          <div
+            id="printButton"
+            style={{ width: "40px" }}
+            onClick={printFunction}
+          >
+            <PrintIcon />
+          </div>
+        </div>
+        <div id="backButton" onClick={backFunction}>
+          <ArrowBackIcon sx={{ padding: "0" }} />
+        </div>
       </div>
-      <div>
-        <h3>Instructions</h3>
-        <ol>
-          {instructions.map((i) => (
-            <li>{i}</li>
-          ))}
-        </ol>
-      </div>
-      <div>
-        <h3>Notes</h3>
-        <ul>
-          {notes.map((i) => (
-            <li>{i}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Recipe;
