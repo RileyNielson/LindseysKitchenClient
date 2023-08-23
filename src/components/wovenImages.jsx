@@ -6,20 +6,18 @@ export default function TitlebarImageList(props) {
 
   var showingCatagories = props.showCatagories.filter((c) => c.length > 0);
 
-  if (props.chosenFilter !== "ShowAll") {
+  if (
+    props.chosenFilter !== "ShowAll" &&
+    !props.catagories.includes(props.chosenFilter)
+  ) {
     showingCatagories = props.showCatagories;
   }
 
   function handleClick(item) {
-    console.log(item);
-
     if (props.chosenFilter === "ShowAll") {
-      props.setChosenFilter(() => {
-        // document.querySelector("#cardContainer").scrollTo(0, 0);
-        // document.getElementById("cardContainer").style.overflow = "hidden";
-        // document.querySelector("#loadCircle").classList.remove("hidden");
-        return item.title;
-      });
+      props.setChosenFilter(item.title);
+    } else if (props.catagories.includes(props.chosenFilter)) {
+      props.setChosenFilter(item.title);
     } else {
       showingCatagories = props.showCatagories;
       props.setRecipe(() => {
@@ -29,9 +27,11 @@ export default function TitlebarImageList(props) {
     }
   }
 
+  const height = props.chosenFilter !== "ShowAll" ? 90 : 60;
+
   return (
     <div id="cardContainer" className="cardContainer">
-      <div id="topBorder"></div>
+      <div id="topBorder" style={{ height: height }}></div>
       {showingCatagories.map((item) => (
         <div className="card" onClick={() => handleClick(item)}>
           <img src={item.photos} alt={item.title} loading="lazy" />

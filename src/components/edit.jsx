@@ -10,6 +10,8 @@ function Edit(props) {
   const filter = props.filter;
   const setFilter = props.setFilter;
   const [showCatagories, setShowCatagories] = useState([]);
+  const catagory = props.catagory;
+  const setCatagory = props.setCatagory;
 
   const navigate = useNavigate();
 
@@ -17,6 +19,7 @@ function Edit(props) {
 
   // This method fetches the records from the database.
   useEffect(() => {
+    
     async function getRecipes() {
       const response = await fetch(`http://localhost:5050/recipes/`);
 
@@ -29,61 +32,54 @@ function Edit(props) {
       const recip = await response.json();
 
       props.setRecipes(() => {
-        // document.getElementById("cardContainer") && document.getElementById("cardContainer").style.overflow = "auto";
         document.querySelector("#loadCircle") &&
           document.querySelector("#loadCircle").classList.add("hidden");
         return recip;
       });
     }
 
-    console.log("Getting Recipes");
-
     getRecipes();
 
     return;
-  }, [recipes.length]);
+  }, [recipes, props]);
 
   useEffect(() => {
     if (props.filter === "Catagories") {
       if (props.chosenFilter === "ShowAll") {
         getCatagories(recipes);
-        document
-          .getElementById("filterButtonContainer")
-          .classList.remove("hidden");
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
+      } else if (props.catagories.includes(props.chosenFilter)) {
+        setCatagory(props.chosenFilter);
+        getTags(
+          recipes.filter((r) => r.catagories.includes(props.chosenFilter))
+        );
+        document.querySelector("#loadCircle").classList.add("hidden");
+        document.getElementById("backButton").classList.remove("hidden");
+        document.getElementById("catagoryTitle").classList.remove("hidden");
       } else {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
-        document
-          .getElementById("filterButtonContainer")
-          .classList.add("hidden");
         document.getElementById("catagoryTitle").classList.remove("hidden");
         setShowCatagories(() => {
-          return recipes.filter((r) =>
-            r.catagories.includes(props.chosenFilter)
+          return recipes.filter(
+            (r) =>
+              r.tags.includes(props.chosenFilter) &&
+              r.catagories.includes(catagory)
           );
         });
       }
-    } else if(props.filter === "Tags"){
+    } else if (props.filter === "Tags") {
       if (props.chosenFilter === "ShowAll") {
         getTags(recipes);
-        document
-          .getElementById("filterButtonContainer")
-          .classList.remove("hidden");
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
       } else {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
-        document
-          .getElementById("filterButtonContainer")
-          .classList.add("hidden");
         document.getElementById("catagoryTitle").classList.remove("hidden");
         setShowCatagories(() => {
-          return recipes.filter((r) =>
-            r.tags.includes(props.chosenFilter)
-          );
+          return recipes.filter((r) => r.tags.includes(props.chosenFilter));
         });
       }
     }
@@ -122,10 +118,9 @@ function Edit(props) {
       setShowCatagories(shownTags);
     }
 
-    console.log("Showing Recipes");
-
     return;
-  }, [props.chosenFilter, props.catagories]);
+  }, [props.chosenFilter, props.catagories, catagory, props.filter, props.tags, recipes, setCatagory]);
+
 
   function handleClick(e) {
     setFilter(e.target.innerText);

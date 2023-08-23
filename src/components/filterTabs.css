@@ -10,14 +10,19 @@
     /* Make them block level
        and only as wide as they need */
     float: left; 
+    margin-left: 5px;
     padding: 6px; 
     text-decoration: none;
     width: 12vw;
     text-align: center;
+    border-top: 2px solid rgba(203, 203, 203, 0);
+    border-left: 2px solid rgba(203, 203, 203, 0);
+    border-right: 2px solid rgba(203, 203, 203, 0);
+    
     
     /* Default colors */ 
     color: grey;
-    background: rgb(244, 244, 244); 
+    background: rgb(244, 244, 244);
     
     /* Only round the top corners */
     -webkit-border-top-left-radius: 15px;
@@ -30,27 +35,19 @@
   .tabs .active {
     /* Highest, active tab is on top */
     z-index: 3;
+    
   }
   .tabs .active a { 
     /* Colors when tab is active */
     background: rgb(221,234,234); 
-    color: (244, 244, 244); 
+    color: (244, 244, 244);
+    border-top: 2px solid rgb(203, 203, 203);
+    border-left: 2px solid rgb(203, 203, 203);
+    border-right: 2px solid rgb(203, 203, 203);
+    border-bottom: 2px solid rgb(221,234,234);
   }
-  .tabs li:before, .tabs li:after, 
-  .tabs li a:before, .tabs li a:after {
-    /* All pseudo elements are 
-       abs. positioned and on bottom */
-    position: absolute;
-    bottom: 0;
-  }
-  /* Only the first, last, and active
-     tabs need pseudo elements at all */
-  .tabs li:last-child:after,   .tabs li:last-child a:after,
-  .tabs li:first-child:before, .tabs li:first-child a:before,
-  .tabs .active:after,   .tabs .active:before, 
-  .tabs .active a:after, .tabs .active a:before {
-    content: "";
-  }
+ 
+
 
   /* Squares */
 

@@ -1,33 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import SearchBar from "./searchBar";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router";
 import "./filterTabs.css";
 
 function HeaderBar(props) {
+  const navigate = useNavigate();
   const filter = props.filter;
 
-  function handleClick() {
-    props.setChosenFilter("ShowAll");
-    // document.querySelector(".loadCircle") && document.querySelector(".loadCircle").classList.remove("hidden");
-    document.getElementById("catagoryTitle") &&
-      document.getElementById("catagoryTitle").classList.add("hidden");
+  useEffect(() => {
+    document.getElementById( filter + "Filter").classList.add("activeFilterButton")
+  })
+
+  function clickFilter(e) {
+    e.target.classList.add("activeFilterButton");
+    props.setChosenFilter("ShowAll")
+    if (e.target.innerText === "Tags") {
+      props.setFilter("Tags")
+      document.getElementById("CatagoriesFilter").classList.remove("activeFilterButton")
+    } else if( e.target.innerText === "Catagories"){
+      props.setFilter("Catagories")
+      document.getElementById("TagsFilter").classList.remove("activeFilterButton")
+    }
+    navigate("/");
   }
-
-  const styleChip = {
-    backgroundColor: "lightGrey",
-    "&:active": { backgroundColor: "teal", color: "white" },
-    fontSize: "16px",
-  };
-
-  const activefilter = { backgroundColor: "teal", color: "white" };
-
-  const filters = ["Catagories", "Tags"];
 
   return (
     <header id="App-header">
       <NavLink className="linkHome" to="/">
-        <img src="./logo.png" id="logoImg" />
+        <img src="./logo.png" alt="logo" id="logoImg" />
         {/* <div id="logoName" className="font" onClick={handleClick}>
           Lindsey's Kitchen
         </div> */}
@@ -37,14 +39,8 @@ function HeaderBar(props) {
           <div id="catagoryHeader">{props.chosenFilter}</div>
         </div>
         <div id="filterButtonContainer" className="filterButtonContainer">
-          <ul class="tabs group">
-            <li class="active">
-              <a>Catagories</a>
-            </li>
-            <li>
-              <a>Tags</a>
-            </li>
-          </ul>
+          <div id="CatagoriesFilter" className="filterButton" onClick={clickFilter}> Catagories </div>
+          <div id="TagsFilter" className="filterButton" onClick={clickFilter}> Tags </div>
           {/* {filters.map((f) => {
             return f === filter ? (
               <Chip

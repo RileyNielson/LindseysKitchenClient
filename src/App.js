@@ -13,6 +13,7 @@ function App() {
   const [chosenFilter, setChosenFilter] = useState("ShowAll");
   const [recipes, setRecipes] = useState([]);
   const [filter, setFilter] = useState("Catagories");
+  const [catagory, setCatagory] = useState("");
   const catagories = [
     "Appetizers",
     "Beverages",
@@ -58,6 +59,7 @@ function App() {
         recipes={recipes}
         setRecipe={setRecipe}
         setChosenFilter={setChosenFilter}
+        setFilter={setFilter}
       />
       <Routes>
         <Route
@@ -73,6 +75,8 @@ function App() {
               setChosenFilter={setChosenFilter}
               filter={filter}
               setFilter={setFilter}
+              catagory={catagory}
+              setCatagory={setCatagory}
             />
           }
         />
@@ -93,6 +97,8 @@ function App() {
               setChosenFilter={setChosenFilter}
               filter={filter}
               setFilter={setFilter}
+              catagory={catagory}
+              setCatagory={setCatagory}
             />
           }
         />
@@ -102,7 +108,7 @@ function App() {
             <EditRecipe catagories={catagories} tags={tags} recipe={recipe} />
           }
         />
-        <Route path="/recipe" element={<Recipe recipe={recipe} />} />
+        <Route path="/recipe" element={<Recipe recipe={recipe} chosenFilter={chosenFilter} setChosenFilter={setChosenFilter} catagory={catagory}/>} />
       </Routes>
     </div>
   );

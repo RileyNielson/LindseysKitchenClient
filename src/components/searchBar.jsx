@@ -39,9 +39,7 @@ function SearchBar(props) {
     document.getElementById("searchContents").classList.add("hidden");
     document.getElementById("searchInput").placeholder = "Search...";
     if (window.location.pathname === "/edit") {
-      {
-        navigate("/editrecipe");
-      }
+      navigate("/editrecipe");
     } else {
       navigate("/recipe");
     }
@@ -65,6 +63,7 @@ function SearchBar(props) {
       <input
         type="text"
         placeholder="Search..."
+        value={searchVal}
         onChange={changeSearch}
         onClick={openSearch}
         id="searchInput"
@@ -73,7 +72,7 @@ function SearchBar(props) {
       <div id="searchContents">
         {searchRec.map((r) => (
           <div className="searchItem" onClick={(e) => searchClick(e, r.id)}>
-            <img className="searchImg" src={r.photo} />
+            <img className="searchImg" alt="r.label" src={r.photo} />
             <p className="searchLabel">{r.label}</p>
           </div>
         ))}

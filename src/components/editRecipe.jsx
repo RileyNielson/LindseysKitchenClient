@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import CatagoryInput from "./catagoryInput";
-import stockImage from "./stockImage";
 
 function EditRecipe(props) {
   const [recipe, setRecipe] = useState(props.recipe);

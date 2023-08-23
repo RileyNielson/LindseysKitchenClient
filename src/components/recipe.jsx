@@ -28,13 +28,19 @@ function Recipe(props) {
 
     if (inputElement.checkValidity()) {
       source = (
-        <a href={source} target="_blank">
+        <a href={source} rel="noreferrer" target="_blank">
           {source}
         </a>
       );
     }
 
+    console.log(props.chosenFilter);
+    console.log(props.catagory);
+
     function backFunction() {
+      if (props.catagory === "") {
+        props.setChosenFilter("ShowAll");
+      } 
       navigate("/");
     }
 
@@ -45,14 +51,15 @@ function Recipe(props) {
     return (
       <div id="recipeDisplay">
         <div id="backgroundStripes">
-          <div className="stripe teal"></div>
-          <div className="stripe grey"></div>
-          <div className="stripe teal"></div>
-          <div className="stripe grey"></div>
-          <div className="stripe teal"></div>
+        <div className="stripe grey"></div>
+        <div className="stripe teal"></div>
+        <div className="stripe grey"></div>
+        <div className="stripe teal"></div>
+        <div className="stripe grey"></div>
+        <div className="stripe teal"></div>
         </div>
-        <div id="recipeContainer" style={{backgroundColor: "white"}}>
-          <img src={recipe.photos} alt={recipe.title} />
+        <div id="recipeContainer" style={{ backgroundColor: "white" }}>
+          <img id="recipeImg" src={recipe.photos} alt={recipe.title} />
           <h2>{recipe.title}</h2>
           <h3>Source: {source}</h3>
           <h3>Servings: {recipe.servings}</h3>
@@ -75,14 +82,17 @@ function Recipe(props) {
               ))}
             </ol>
           </div>
-          <div>
-            <h3>Notes</h3>
-            <ul>
-              {notes.map((i) => (
-                <li>{i}</li>
-              ))}
-            </ul>
-          </div>
+          {notes.length > 0 && (
+            <div>
+              <h3>Notes</h3>
+              <ul>
+                {notes.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <img id="footerImg" alt="logo" src="./logoImg.png" />
           <div className="foot"></div>
           <div
             id="printButton"

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import WovenImageList from "./wovenImages";
-import Chip from "@mui/material/Chip";
 import stockImage from "./stockImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
-  const filter = props.filter;
-  const setFilter = props.setFilter;
   const [showCatagories, setShowCatagories] = useState([]);
+
+  const catagory = props.catagory;
+  const setCatagory = props.setCatagory;
 
   const navigate = useNavigate();
 
@@ -29,61 +29,54 @@ function Home(props) {
       const recip = await response.json();
 
       props.setRecipes(() => {
-        // document.getElementById("cardContainer") && document.getElementById("cardContainer").style.overflow = "auto";
         document.querySelector("#loadCircle") &&
           document.querySelector("#loadCircle").classList.add("hidden");
         return recip;
       });
     }
 
-    console.log("Getting Recipes");
-
     getRecipes();
 
     return;
-  }, [recipes.length]);
+  }, [recipes, props]);
 
   useEffect(() => {
     if (props.filter === "Catagories") {
       if (props.chosenFilter === "ShowAll") {
         getCatagories(recipes);
-        document
-          .getElementById("filterButtonContainer")
-          .classList.remove("hidden");
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
+      } else if (props.catagories.includes(props.chosenFilter)) {
+        setCatagory(props.chosenFilter);
+        getTags(
+          recipes.filter((r) => r.catagories.includes(props.chosenFilter))
+        );
+        document.querySelector("#loadCircle").classList.add("hidden");
+        document.getElementById("backButton").classList.remove("hidden");
+        document.getElementById("catagoryTitle").classList.remove("hidden");
       } else {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
-        document
-          .getElementById("filterButtonContainer")
-          .classList.add("hidden");
         document.getElementById("catagoryTitle").classList.remove("hidden");
         setShowCatagories(() => {
-          return recipes.filter((r) =>
-            r.catagories.includes(props.chosenFilter)
+          return recipes.filter(
+            (r) =>
+              r.catagories.includes(catagory) &&
+              r.tags.includes(props.chosenFilter)
           );
         });
       }
-    } else if(props.filter === "Tags"){
+    } else if (props.filter === "Tags") {
       if (props.chosenFilter === "ShowAll") {
         getTags(recipes);
-        document
-          .getElementById("filterButtonContainer")
-          .classList.remove("hidden");
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
       } else {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
-        document
-          .getElementById("filterButtonContainer")
-          .classList.add("hidden");
         document.getElementById("catagoryTitle").classList.remove("hidden");
         setShowCatagories(() => {
-          return recipes.filter((r) =>
-            r.tags.includes(props.chosenFilter)
-          );
+          return recipes.filter((r) => r.tags.includes(props.chosenFilter));
         });
       }
     }
@@ -122,78 +115,45 @@ function Home(props) {
       setShowCatagories(shownTags);
     }
 
-    console.log("Showing Recipes");
-
     return;
-  }, [props.chosenFilter, props.catagories]);
-
-  function handleClick(e) {
-    setFilter(e.target.innerText);
-    e.preventDefault();
-  }
-
-  const styleChip = {
-    color: "grey",
-    backgroundColor: "rgb(244, 244, 244)",
-    "&:active": { backgroundColor: "teal", color: "white" },
-    fontSize: "16px",
-  };
+  }, [
+    props.chosenFilter,
+    props.catagories,
+    catagory,
+    props.filter,
+    props.tags,
+    recipes,
+    setCatagory,
+  ]);
 
   function backFunction() {
-    setFilter("Catagories");
-    props.setChosenFilter("ShowAll");
+    if (
+      catagory === "" ||
+      props.chosenFilter === catagory ||
+      props.filter === "Tags"
+    ) {
+      props.setChosenFilter("ShowAll");
+    } else {
+      props.setChosenFilter(catagory);
+    }
     navigate("/");
   }
 
-  const activefilter = { backgroundColor: "teal", color: "white" };
-
-  const filters = ["Catagories", "Tags"];
-
-  console.log(recipes);
-  console.log(showCatagories);
+  console.log(props.chosenFilter);
+  console.log(props.filter);
 
   return (
     <div id="App-main">
       <div id="backgroundStripes">
         <div className="stripe teal"></div>
-        {/* <div className="stripe red"></div> */}
         <div className="stripe grey"></div>
         <div className="stripe teal"></div>
         <div className="stripe grey"></div>
         <div className="stripe teal"></div>
       </div>
-      {/* <Sprinkles /> */}
-      {/* <Pinstripes /> */}
-      <div id="searchStrip">
-        <div id="catagoryTitle" className="catagoryTitle hidden">
-          <div id="catagoryHeader">{props.chosenFilter}</div>
-        </div>
-        <div id="filterButtonContainer" className="filterButtonContainer">
-          {filters.map((f) => {
-            return f === filter ? (
-              <Chip
-                className="filterButton"
-                label={f}
-                onClick={handleClick}
-                size="large"
-                style={activefilter}
-                sx={{
-                  fontSize: "16px",
-                }}
-              />
-            ) : (
-              <Chip
-                className="filterButton"
-                label={f}
-                name={f}
-                size="large"
-                onClick={handleClick}
-                sx={styleChip}
-              />
-            );
-          })}
-        </div>
-      </div>
+      {props.chosenFilter !== "ShowAll" && (
+        <div id="catagoryTitle">{props.chosenFilter}</div>
+      )}
       <WovenImageList
         recipes={recipes}
         setRecipe={props.setRecipe}
@@ -201,6 +161,7 @@ function Home(props) {
         setChosenFilter={props.setChosenFilter}
         showCatagories={showCatagories}
         setShowCatagories={setShowCatagories}
+        catagories={props.catagories}
       />
       <div id="loadCircle" className="loadCircle">
         <CircularProgress sx={{ color: "white" }} />
@@ -209,7 +170,7 @@ function Home(props) {
         id="backButton"
         className="hidden"
         onClick={backFunction}
-        style={{ position: "absolute", left: "10px", top: "15px" }}
+        style={{ top: "150px" }}
       >
         <ArrowBackIcon sx={{ padding: "0" }} />
       </div>
