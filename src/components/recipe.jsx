@@ -27,7 +27,11 @@ function Recipe(props) {
     inputElement.value = source;
 
     if (inputElement.checkValidity()) {
-      source = <a href={source} target="_blank">{source}</a>;
+      source = (
+        <a href={source} target="_blank">
+          {source}
+        </a>
+      );
     }
 
     function backFunction() {
@@ -40,7 +44,14 @@ function Recipe(props) {
 
     return (
       <div id="recipeDisplay">
-        <div id="recipeContainer">
+        <div id="backgroundStripes">
+          <div className="stripe teal"></div>
+          <div className="stripe grey"></div>
+          <div className="stripe teal"></div>
+          <div className="stripe grey"></div>
+          <div className="stripe teal"></div>
+        </div>
+        <div id="recipeContainer" style={{backgroundColor: "white"}}>
           <img src={recipe.photos} alt={recipe.title} />
           <h2>{recipe.title}</h2>
           <h3>Source: {source}</h3>

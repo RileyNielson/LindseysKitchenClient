@@ -3,18 +3,8 @@ import { useNavigate } from "react-router";
 import CatagoryInput from "./catagoryInput";
 import stockImage from "./stockImage";
 
-function Create(props) {
-  const [recipe, setRecipe] = useState({
-    title: "",
-    catagories: [],
-    tags: [],
-    source: "",
-    servings: "",
-    ingredients: "",
-    instructions: "",
-    notes: "",
-    photos: stockImage,
-  });
+function EditRecipe(props) {
+  const [recipe, setRecipe] = useState(props.recipe);
   const [idMessage, setIdMessage] = useState("Click Me To Upload Image");
 
   const navigate = useNavigate();
@@ -27,36 +17,24 @@ function Create(props) {
     });
   }
 
+  console.log(recipe);
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
 
     // When a post request is sent to the create url, we'll add a new record to the database.
-    const newRecipe = { ...recipe };
-    console.log(newRecipe);
+    const editedRecipe = {...recipe};
+    console.log(editedRecipe);
 
-    await fetch("http://localhost:5050/recipes", {
-      method: "POST",
+    await fetch(`http://localhost:5050/recipes/${props.recipe._id}`, {
+      method: "PATCH",
+      body: JSON.stringify(editedRecipe),
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newRecipe),
-    }).catch((error) => {
-      window.alert(error);
-      return;
     });
 
-    setRecipe({
-      title: "",
-      catagories: [],
-      tags: [],
-      source: "",
-      servings: "",
-      ingredients: "",
-      instructions: "",
-      notes: "",
-      photos: "",
-    });
+    setRecipe(editedRecipe);
     navigate("/");
   }
 
@@ -123,7 +101,7 @@ function Create(props) {
     <div id="App-main">
       <div id="create-main">
         <div id="recipeInfo">
-          <h1>New Recipe</h1>
+          <h1>Edit Recipe</h1>
           <div className="spacer">
             <p className="tag">Title</p>
             <input
@@ -245,4 +223,4 @@ function Create(props) {
   );
 }
 
-export default Create;
+export default EditRecipe;

@@ -9,43 +9,70 @@ body {
 @media print {
   #App-header {
     height: 0;
-    display: none!important;
-    z-index: 0!important;
+    display: none !important;
+    z-index: 0 !important;
   }
 
   #backButton {
-    display: none!important;
+    display: none !important;
   }
 
   #printButton {
-    display: none!important;
+    display: none !important;
   }
 
   #recipeContainer {
-    margin-top: 10px!important;
+    margin-top: 10px !important;
   }
 }
 
 #App-header {
   position: fixed;
   z-index: 1;
-  background-color: teal;
-  min-height: 65px;
+  background-color: white;
+  min-height: 80px;
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: end;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
   color: white;
+  box-shadow: 0px 0px 4px #282c34;
 }
 
 .linkHome {
-  color: white;
+  /* margin-left: 10%; */
+  color: teal;
   text-decoration: none;
 }
 
 #logoName {
   margin-left: 20px;
+}
+
+#logoImg {
+  height: 120px;
+  width: 350px;
+  object-fit: cover;
+}
+
+#searchContainer {
+  position: absolute;
+  right: 50px;
+  z-index: 10;
+  height: fit-content;
+  width: 25%;
+  background-color: rgb(244, 244, 244);
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+#catagoryHeader {
+  position: absolute;
+  width: 100%;
+  text-align: left;
 }
 
 #catagoryButton {
@@ -57,6 +84,14 @@ body {
   margin-right: 50px;
 }
 
+.filterButtonContainer {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  bottom: -32px;
+  margin-left: 10px;
+}
+
 .font {
   font-family: "Dancing Script", cursive;
   font-size: 40px;
@@ -66,7 +101,7 @@ body {
   position: absolute;
   background-color: white;
   z-index: -1;
-  top: 65px;
+  top: 130px;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -74,25 +109,42 @@ body {
   align-items: center;
 }
 
+#backgroundStripes {
+  position: fixed;
+  z-index: -10;
+  height: max-content;
+  overflow: hidden;
+}
+
+.stripe {
+  height: 30vh;
+  width: 200vw;
+}
+
+.teal {
+  background-color: rgba(19, 115, 115, 0.16);
+  height: 28vh;
+}
+
+.red {
+  background-color: rgba(227, 165, 140, 0.1);
+}
+
+.grey {
+  background-color: rgb(244, 244, 244);
+}
+
 #searchStrip {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   height: 65px;
-  width: 79%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-}
-
-#searchContainer {
-  position: absolute;
-  right: 20px;
-  z-index: 10;
-  height: fit-content;
-  width: 30%;
-  max-width: 300px;
+  position: fixed;
 }
 
 .catagoryTitle {
@@ -113,7 +165,7 @@ body {
   font-size: 30px;
   position: absolute;
   left: 10px;
-  top: 80px;
+  top: 95px;
 }
 
 #backButton:hover {
@@ -121,20 +173,9 @@ body {
   background-color: #d5d5d5;
 }
 
-#catagoryHeader {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-}
-
-.filterButtonContainer {
-  display: flex;
-  width: 340px;
-  justify-content: space-between;
-}
-
 .filterButton {
   font-size: 3px;
+  background-color: rgb(244, 244, 244);
 }
 
 .loadCircle {
@@ -160,11 +201,12 @@ body {
 #cardContainer {
   position: absolute;
   z-index: -1;
-  background-color: white;
+  /* background-color: white; */
   width: 80%;
   height: 100%;
   overflow-y: scroll;
-  box-shadow: 0px 0px 10px #282c34;
+  /* border: white 5px solid; */
+  /* box-shadow: 0px 0px 10px #282c34; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -187,9 +229,10 @@ body {
   flex: 1 1 auto;
   width: 20%;
   aspect-ratio: 1 / 1;
-  min-width: 200px;
+  min-width: 180px;
   max-width: 300px;
   margin: 5px;
+  cursor: pointer;
 }
 
 .card img {
@@ -342,7 +385,7 @@ h1 {
   font-weight: 400;
   z-index: 0;
   font-size: 20px;
-  margin-top: 80px;
+  margin-top: 100px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;

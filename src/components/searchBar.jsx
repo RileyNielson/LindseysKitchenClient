@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./searchBar.css";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate } from "react-router-dom";
 
 function SearchBar(props) {
@@ -19,7 +16,7 @@ function SearchBar(props) {
   function changeSearch(e) {
     setSearchVal(e.target.value.toLowerCase());
     if (e.target.value === "") {
-      setSearchRec(searchRecipes);
+      setSearchRec([]);
     } else {
       setSearchRec(
         searchRecipes.filter((fr) => {
@@ -40,12 +37,18 @@ function SearchBar(props) {
     props.setRecipe(item[0]);
     setSearchRec(searchRecipes);
     document.getElementById("searchContents").classList.add("hidden");
-    document.getElementById("searchInput").placeholder = "Search..."
-    navigate("/recipe");
+    document.getElementById("searchInput").placeholder = "Search...";
+    if (window.location.pathname === "/edit") {
+      {
+        navigate("/editrecipe");
+      }
+    } else {
+      navigate("/recipe");
+    }
   }
 
   function openSearch(e) {
-    e.target.placeholder = ""
+    e.target.placeholder = "";
     document.getElementById("searchContents").classList.toggle("hidden");
   }
 
@@ -53,7 +56,7 @@ function SearchBar(props) {
     var container = document.getElementById("searchContents");
     if (!container.contains(e.target)) {
       container.classList.add("hidden");
-      document.getElementById("searchInput").placeholder = "Search..."
+      document.getElementById("searchInput").placeholder = "Search...";
     }
   });
 
@@ -65,8 +68,9 @@ function SearchBar(props) {
         onChange={changeSearch}
         onClick={openSearch}
         id="searchInput"
-      ></input>
-      <div id="searchContents" >
+      />
+
+      <div id="searchContents">
         {searchRec.map((r) => (
           <div className="searchItem" onClick={(e) => searchClick(e, r.id)}>
             <img className="searchImg" src={r.photo} />

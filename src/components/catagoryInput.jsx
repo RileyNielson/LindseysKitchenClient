@@ -38,7 +38,7 @@ export default function CatagoryInput(props) {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          name="catagories"
+          name={props.name}
           value={props.catagoryValues}
           onChange={handleChange}
           input={<OutlinedInput/>}

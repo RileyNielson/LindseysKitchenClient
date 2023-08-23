@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function TitlebarImageList(props) {
+export default function WovenImagesEdit(props) {
   const navigate = useNavigate();
 
   var showingCatagories = props.showCatagories.filter((c) => c.length > 0);
@@ -15,15 +15,12 @@ export default function TitlebarImageList(props) {
 
     if (props.chosenFilter === "ShowAll") {
       props.setChosenFilter(() => {
-        // document.querySelector("#cardContainer").scrollTo(0, 0);
-        // document.getElementById("cardContainer").style.overflow = "hidden";
-        // document.querySelector("#loadCircle").classList.remove("hidden");
         return item.title;
       });
     } else {
       showingCatagories = props.showCatagories;
       props.setRecipe(() => {
-        navigate("/recipe");
+        navigate("/editrecipe");
         return item;
       });
     }

@@ -5,11 +5,14 @@ import Create from "./components/create";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Recipe from "./components/recipe";
+import Edit from "./components/edit";
+import EditRecipe from "./components/editRecipe";
 
 function App() {
   const [recipe, setRecipe] = useState();
   const [chosenFilter, setChosenFilter] = useState("ShowAll");
   const [recipes, setRecipes] = useState([]);
+  const [filter, setFilter] = useState("Catagories");
   const catagories = [
     "Appetizers",
     "Beverages",
@@ -42,11 +45,20 @@ function App() {
   const tags = [
     "Sweet",
     "Savory",
-  ]
+    "Dairy Free",
+    "Freezer Meal",
+    "Good For Kids",
+    "Holiday",
+  ];
 
   return (
     <div id="App">
-      <HeaderBar recipes={recipes} setRecipe={setRecipe} setChosenFilter={setChosenFilter} />
+      <HeaderBar
+        filter={filter}
+        recipes={recipes}
+        setRecipe={setRecipe}
+        setChosenFilter={setChosenFilter}
+      />
       <Routes>
         <Route
           index
@@ -56,12 +68,40 @@ function App() {
               setRecipes={setRecipes}
               setRecipe={setRecipe}
               catagories={catagories}
+              tags={tags}
               chosenFilter={chosenFilter}
               setChosenFilter={setChosenFilter}
+              filter={filter}
+              setFilter={setFilter}
             />
           }
         />
-        <Route path="/create" element={<Create catagories={catagories} />} />
+        <Route
+          path="/create"
+          element={<Create catagories={catagories} tags={tags} />}
+        />
+        <Route
+          path="/edit"
+          element={
+            <Edit
+              recipes={recipes}
+              setRecipes={setRecipes}
+              setRecipe={setRecipe}
+              catagories={catagories}
+              tags={tags}
+              chosenFilter={chosenFilter}
+              setChosenFilter={setChosenFilter}
+              filter={filter}
+              setFilter={setFilter}
+            />
+          }
+        />
+        <Route
+          path="/editrecipe"
+          element={
+            <EditRecipe catagories={catagories} tags={tags} recipe={recipe} />
+          }
+        />
         <Route path="/recipe" element={<Recipe recipe={recipe} />} />
       </Routes>
     </div>

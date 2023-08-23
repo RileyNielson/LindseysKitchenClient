@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import WovenImageList from "./wovenImages";
+import WovenImageList from "./wovenImagesEdit";
 import Chip from "@mui/material/Chip";
 import stockImage from "./stockImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
-function Home(props) {
+function Edit(props) {
   const filter = props.filter;
   const setFilter = props.setFilter;
   const [showCatagories, setShowCatagories] = useState([]);
@@ -217,4 +217,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default Edit;
