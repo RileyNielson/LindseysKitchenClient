@@ -6,21 +6,22 @@ export default function WovenImagesEdit(props) {
 
   var showingCatagories = props.showCatagories.filter((c) => c.length > 0);
 
-  if (props.chosenFilter !== "ShowAll") {
+  if (
+    props.chosenFilter !== "ShowAll" &&
+    !props.catagories.includes(props.chosenFilter)
+  ) {
     showingCatagories = props.showCatagories;
   }
 
   function handleClick(item) {
-    console.log(item);
-
     if (props.chosenFilter === "ShowAll") {
-      props.setChosenFilter(() => {
-        return item.title;
-      });
+      props.setChosenFilter(item.title);
+    } else if (props.catagories.includes(props.chosenFilter)) {
+      props.setChosenFilter(item.title);
     } else {
       showingCatagories = props.showCatagories;
       props.setRecipe(() => {
-        navigate("/editrecipe");
+        navigate("/editRecipe");
         return item;
       });
     }

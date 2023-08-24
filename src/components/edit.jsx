@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import WovenImageList from "./wovenImagesEdit";
-import Chip from "@mui/material/Chip";
 import stockImage from "./stockImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
 function Edit(props) {
-  const filter = props.filter;
   const setFilter = props.setFilter;
   const [showCatagories, setShowCatagories] = useState([]);
   const catagory = props.catagory;
@@ -121,28 +119,11 @@ function Edit(props) {
     return;
   }, [props.chosenFilter, props.catagories, catagory, props.filter, props.tags, recipes, setCatagory]);
 
-
-  function handleClick(e) {
-    setFilter(e.target.innerText);
-    e.preventDefault();
-  }
-
-  const styleChip = {
-    color: "grey",
-    backgroundColor: "rgb(244, 244, 244)",
-    "&:active": { backgroundColor: "teal", color: "white" },
-    fontSize: "16px",
-  };
-
   function backFunction() {
     setFilter("Catagories");
     props.setChosenFilter("ShowAll");
     navigate("/");
   }
-
-  const activefilter = { backgroundColor: "teal", color: "white" };
-
-  const filters = ["Catagories", "Tags"];
 
   console.log(recipes);
   console.log(showCatagories);
@@ -151,44 +132,14 @@ function Edit(props) {
     <div id="App-main">
       <div id="backgroundStripes">
         <div className="stripe teal"></div>
-        {/* <div className="stripe red"></div> */}
         <div className="stripe grey"></div>
         <div className="stripe teal"></div>
         <div className="stripe grey"></div>
         <div className="stripe teal"></div>
       </div>
-      {/* <Sprinkles /> */}
-      {/* <Pinstripes /> */}
-      <div id="searchStrip">
-        <div id="catagoryTitle" className="catagoryTitle hidden">
-          <div id="catagoryHeader">{props.chosenFilter}</div>
-        </div>
-        <div id="filterButtonContainer" className="filterButtonContainer">
-          {filters.map((f) => {
-            return f === filter ? (
-              <Chip
-                className="filterButton"
-                label={f}
-                onClick={handleClick}
-                size="large"
-                style={activefilter}
-                sx={{
-                  fontSize: "16px",
-                }}
-              />
-            ) : (
-              <Chip
-                className="filterButton"
-                label={f}
-                name={f}
-                size="large"
-                onClick={handleClick}
-                sx={styleChip}
-              />
-            );
-          })}
-        </div>
-      </div>
+      {props.chosenFilter !== "ShowAll" && (
+        <div id="catagoryTitle">{props.chosenFilter}</div>
+      )}
       <WovenImageList
         recipes={recipes}
         setRecipe={props.setRecipe}
@@ -196,15 +147,16 @@ function Edit(props) {
         setChosenFilter={props.setChosenFilter}
         showCatagories={showCatagories}
         setShowCatagories={setShowCatagories}
+        catagories={props.catagories}
       />
       <div id="loadCircle" className="loadCircle">
-        <CircularProgress sx={{ color: "white" }} />
+        <CircularProgress sx={{ position:"absolute", top:"35%", color: "grey" }} />
       </div>
       <div
         id="backButton"
         className="hidden"
         onClick={backFunction}
-        style={{ position: "absolute", left: "10px", top: "15px" }}
+        style={{ top: "150px" }}
       >
         <ArrowBackIcon sx={{ padding: "0" }} />
       </div>

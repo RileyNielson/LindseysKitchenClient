@@ -12,6 +12,8 @@
 }
 
 #searchInput::placeholder {
+  font-family: 'Voltaire', sans-serif;
+  letter-spacing: 0.75px;
   color: #5e5e5e;
   opacity: 0.5;
 }
@@ -35,6 +37,8 @@
 }
 
 .searchItem {
+  font-family: 'Voltaire', sans-serif;
+  letter-spacing: 0.1px;
   background-color: white;
   border-left: rgb(255, 255, 255) solid 2px;
   border-top: rgb(255, 255, 255) solid 2px;

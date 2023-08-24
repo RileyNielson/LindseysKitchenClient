@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderBar from "./components/header";
 import Home from "./components/home";
 import Create from "./components/create";
@@ -51,6 +51,31 @@ function App() {
     "Good For Kids",
     "Holiday",
   ];
+
+  // This method fetches the records from the database.
+  useEffect(() => {
+    async function getRecipes() {
+      const response = await fetch(`http://localhost:5050/recipes/`);
+
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const recip = await response.json();
+
+      setRecipes(() => {
+        document.querySelector("#loadCircle") &&
+          document.querySelector("#loadCircle").classList.add("hidden");
+        return recip;
+      });
+    }
+
+    getRecipes();
+
+    return;
+  }, [recipes.length]);
 
   return (
     <div id="App">

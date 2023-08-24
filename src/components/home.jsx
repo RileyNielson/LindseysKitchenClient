@@ -15,30 +15,6 @@ function Home(props) {
 
   const recipes = props.recipes;
 
-  // This method fetches the records from the database.
-  useEffect(() => {
-    async function getRecipes() {
-      const response = await fetch(`http://localhost:5050/recipes/`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const recip = await response.json();
-
-      props.setRecipes(() => {
-        document.querySelector("#loadCircle") &&
-          document.querySelector("#loadCircle").classList.add("hidden");
-        return recip;
-      });
-    }
-
-    getRecipes();
-
-    return;
-  }, [recipes, props]);
 
   useEffect(() => {
     if (props.filter === "Catagories") {
@@ -115,6 +91,7 @@ function Home(props) {
       setShowCatagories(shownTags);
     }
 
+    console.log("Catagories Updating");
     return;
   }, [
     props.chosenFilter,
@@ -164,7 +141,7 @@ function Home(props) {
         catagories={props.catagories}
       />
       <div id="loadCircle" className="loadCircle">
-        <CircularProgress sx={{ color: "white" }} />
+        <CircularProgress sx={{ position:"absolute", top:"35%", color: "grey" }} />
       </div>
       <div
         id="backButton"

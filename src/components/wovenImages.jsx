@@ -27,7 +27,7 @@ export default function TitlebarImageList(props) {
     }
   }
 
-  const height = props.chosenFilter !== "ShowAll" ? 90 : 60;
+  const height = props.chosenFilter !== "ShowAll" ? 90 : 50;
 
   return (
     <div id="cardContainer" className="cardContainer">

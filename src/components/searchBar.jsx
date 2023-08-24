@@ -14,7 +14,7 @@ function SearchBar(props) {
   }));
 
   function changeSearch(e) {
-    setSearchVal(e.target.value.toLowerCase());
+    setSearchVal(e.target.value);
     if (e.target.value === "") {
       setSearchRec([]);
     } else {
