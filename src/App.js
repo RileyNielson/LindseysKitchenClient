@@ -104,65 +104,46 @@ function App() {
               setCatagory={setCatagory}
             />
           }
-        >
-          <Route
-            path="/"
-            element={
-              <Home
-                recipes={recipes}
-                setRecipes={setRecipes}
-                setRecipe={setRecipe}
-                catagories={catagories}
-                tags={tags}
-                chosenFilter={chosenFilter}
-                setChosenFilter={setChosenFilter}
-                filter={filter}
-                setFilter={setFilter}
-                catagory={catagory}
-                setCatagory={setCatagory}
-              />
-            }
-          />
-          <Route
-            path="/create"
-            element={<Create catagories={catagories} tags={tags} />}
-          />
-          <Route
-            path="/edit"
-            element={
-              <Edit
-                recipes={recipes}
-                setRecipes={setRecipes}
-                setRecipe={setRecipe}
-                catagories={catagories}
-                tags={tags}
-                chosenFilter={chosenFilter}
-                setChosenFilter={setChosenFilter}
-                filter={filter}
-                setFilter={setFilter}
-                catagory={catagory}
-                setCatagory={setCatagory}
-              />
-            }
-          />
-          <Route
-            path="/editrecipe"
-            element={
-              <EditRecipe catagories={catagories} tags={tags} recipe={recipe} />
-            }
-          />
-          <Route
-            path="/recipe"
-            element={
-              <Recipe
-                recipe={recipe}
-                chosenFilter={chosenFilter}
-                setChosenFilter={setChosenFilter}
-                catagory={catagory}
-              />
-            }
-          />
-        </Route>
+        />
+        <Route
+          path="/create"
+          element={<Create catagories={catagories} tags={tags} />}
+        />
+        <Route
+          path="/edit"
+          element={
+            <Edit
+              recipes={recipes}
+              setRecipes={setRecipes}
+              setRecipe={setRecipe}
+              catagories={catagories}
+              tags={tags}
+              chosenFilter={chosenFilter}
+              setChosenFilter={setChosenFilter}
+              filter={filter}
+              setFilter={setFilter}
+              catagory={catagory}
+              setCatagory={setCatagory}
+            />
+          }
+        />
+        <Route
+          path="/editrecipe"
+          element={
+            <EditRecipe catagories={catagories} tags={tags} recipe={recipe} />
+          }
+        />
+        <Route
+          path="/recipe"
+          element={
+            <Recipe
+              recipe={recipe}
+              chosenFilter={chosenFilter}
+              setChosenFilter={setChosenFilter}
+              catagory={catagory}
+            />
+          }
+        />
       </Routes>
     </div>
   );
