@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeaderBar from "./components/header";
 import Home from "./components/home";
 import Create from "./components/create";
-import { Route, Routes, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Recipe from "./components/recipe";
 import Edit from "./components/edit";
@@ -86,9 +86,9 @@ function App() {
         setChosenFilter={setChosenFilter}
         setFilter={setFilter}
       />
-      <Switch>
+      <Routes>
         <Route
-          index
+          path="/"
           element={
             <Home
               recipes={recipes}
@@ -134,7 +134,7 @@ function App() {
           }
         />
         <Route path="/recipe" element={<Recipe recipe={recipe} chosenFilter={chosenFilter} setChosenFilter={setChosenFilter} catagory={catagory}/>} />
-      </Switch>
+      </Routes>
     </div>
   );
 }
