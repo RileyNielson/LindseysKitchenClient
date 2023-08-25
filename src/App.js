@@ -87,9 +87,26 @@ function App() {
         setFilter={setFilter}
       />
       <Routes>
-        <Route path="/">
+        <Route
+          index
+          element={
+            <Home
+              recipes={recipes}
+              setRecipes={setRecipes}
+              setRecipe={setRecipe}
+              catagories={catagories}
+              tags={tags}
+              chosenFilter={chosenFilter}
+              setChosenFilter={setChosenFilter}
+              filter={filter}
+              setFilter={setFilter}
+              catagory={catagory}
+              setCatagory={setCatagory}
+            />
+          }
+        >
           <Route
-            index
+            path="/"
             element={
               <Home
                 recipes={recipes}
