@@ -55,7 +55,7 @@ function App() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecipes() {
-      const response = await fetch(`http://18.219.181.110/recipes/`);
+      const response = await fetch(`https://18.219.181.110/recipes`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
