@@ -55,7 +55,7 @@ function App() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecipes() {
-      const response = await fetch(`http://localhost:5050/recipes`);
+      const response = await fetch(`https://lindseyskitchenapi.onrender.com`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
