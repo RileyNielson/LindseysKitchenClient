@@ -55,7 +55,7 @@ function App() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecipes() {
-      const response = await fetch(`https://nielsonserver.online/`);
+      const response = await fetch(`https://localhost:5050/recipes`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
