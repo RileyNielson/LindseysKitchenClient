@@ -26,11 +26,7 @@ body {
   }
 }
 
-@media screen and (max-width: 480px) {
-  #logoImg {
-    width: 150px;
-  }
-}
+
 
 #App-header {
   position: fixed;
@@ -550,4 +546,13 @@ ol {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+@media screen and (max-width: 768px) {
+  #logoImg {
+    min-width: 0;
+    width: 150px;
+    margin-top: 0px;
+  }
 }
