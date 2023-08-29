@@ -649,7 +649,7 @@ ol {
     position: absolute;
     z-index: -1;
     /* background-color: white; */
-    width: 85%;
+    width: 92%;
     height: 95%;
     overflow-y: scroll;
     /* border: white 5px solid; */
@@ -665,6 +665,7 @@ ol {
   .card {
     min-width: 80px;
     width: 80px;
+    height: 80px;
   }
 
   #recipeContainer h2 {
