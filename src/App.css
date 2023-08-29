@@ -661,4 +661,13 @@ ol {
     scrollbar-width: none;
   }
 
+  .card {
+    min-width: 100px;
+    max-width: 200px;
+  }
+
+  #recipeContainer h2 {
+    padding: 0px 10px;
+  }
+
 }
