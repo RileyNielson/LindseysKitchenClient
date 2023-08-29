@@ -600,7 +600,7 @@ ol {
     right: 5px;
     z-index: 10;
     height: fit-content;
-    width: 120px;
+    width: 100px;
     background-color: rgb(244, 244, 244);
     max-width: 300px;
     display: flex;
@@ -638,6 +638,10 @@ ol {
     height: 40px;
     margin-top: 40px;
     justify-content: center;
+  }
+
+  #backgroundStripes {
+    overflow: none;
   }
 
   #cardContainer {
