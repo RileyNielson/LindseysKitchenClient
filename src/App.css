@@ -661,9 +661,9 @@ ol {
   }
 
   .card {
-    min-width: 80px;
-    max-width: 80px;
-    height: 80px;
+    min-width: 100px;
+    max-width: 100px;
+    height: 100px;
   }
 
   #recipeContainer h2 {
