@@ -663,7 +663,7 @@ ol {
 
   .card {
     min-width: 80px;
-    max-width: 200px;
+    width: 80px;
   }
 
   #recipeContainer h2 {
