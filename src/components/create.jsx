@@ -107,7 +107,7 @@ function Create(props) {
     let file = document.querySelector("input[type=file]")["files"][0];
     
     // let reader = new FileReader();
-    
+    console.log(file);
     var blob = file.getAsFile();
 
     const params = {
