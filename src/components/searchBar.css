@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 768px) {
   #searchInput {
-    height: 25px;
+    height: 28px;
     padding: 0;
     width: 75px;
     text-overflow: ellipsis;
