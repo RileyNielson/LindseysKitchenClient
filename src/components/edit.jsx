@@ -19,7 +19,7 @@ function Edit(props) {
   useEffect(() => {
     
     async function getRecipes() {
-      const response = await fetch(`http://localhost:5050/recipes/`);
+      const response = await fetch(`https://lindseyskitchenapi.onrender.com/recipes`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
