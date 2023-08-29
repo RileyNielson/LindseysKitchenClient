@@ -537,6 +537,11 @@ ol {
 
 
 @media screen and (max-width: 768px) {
+
+  body {
+    overflow-y: none;
+  }
+
   #App-header {
     position: fixed;
     z-index: 1;
