@@ -55,7 +55,7 @@ function App() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecipes() {
-      const response = await fetch(`http://localhost:5050/recipes/`);
+      const response = await fetch(`https://lindseyskitchenapi.onrender.com/recipes`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -133,7 +133,17 @@ function App() {
             <EditRecipe catagories={catagories} tags={tags} recipe={recipe} />
           }
         />
-        <Route path="/recipe" element={<Recipe recipe={recipe} chosenFilter={chosenFilter} setChosenFilter={setChosenFilter} catagory={catagory}/>} />
+        <Route
+          path="/recipe"
+          element={
+            <Recipe
+              recipe={recipe}
+              chosenFilter={chosenFilter}
+              setChosenFilter={setChosenFilter}
+              catagory={catagory}
+            />
+          }
+        />
       </Routes>
     </div>
   );
