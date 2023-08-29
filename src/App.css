@@ -26,8 +26,6 @@ body {
   }
 }
 
-
-
 #App-header {
   position: fixed;
   z-index: 1;
@@ -183,17 +181,6 @@ body {
   justify-content: space-evenly;
   align-items: center;
   position: fixed;
-}
-
-#catagoryTitle {
-  font-size: 30px;
-  font-family: "Phudu", cursive;
-  color: #5f5f5f;
-  display: flex;
-  width: 100%;
-  height: 40px;
-  margin-top: 40px;
-  justify-content: center;
 }
 
 #backButton {
@@ -550,9 +537,40 @@ ol {
 
 
 @media screen and (max-width: 768px) {
+  #App-header {
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    justify-content: centerf;
+    align-items: flex-end;
+  }
+  
   #logoImg {
     min-width: 0;
     width: 150px;
+    height: 70px;
     margin-top: 0px;
   }
+
+  .filterButtonContainer {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    margin-left: 5%;
+    height: 30px;
+    bottom: -2px;
+    color: #868686;
+  }
+
+  .filterButton {
+    font-size: 18px;
+    padding-top: 2px;
+    height: 20px;
+    width: fit-content;
+  }
+
 }
