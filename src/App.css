@@ -497,6 +497,7 @@ ol {
 
 #recipeContainer div h3 {
   border-bottom: 1px solid #282c34;
+  margin: 0;
   font-size: 22px;
   font-weight: 500;
 }
