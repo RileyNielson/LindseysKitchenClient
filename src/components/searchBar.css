@@ -9,6 +9,7 @@
   background-color: transparent;
   border-radius: 5px;
   color: #5e5e5e;
+  text-overflow: ellipsis;
 }
 
 #searchInput::placeholder {
@@ -16,6 +17,17 @@
   letter-spacing: 0.75px;
   color: #5e5e5e;
   opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+  #searchInput {
+    width: 75%;
+    text-overflow: ellipsis;
+  }
+
+  #searchInput:focus {
+    width: 125%
+  }
 }
 
 #searchIcon {
