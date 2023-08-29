@@ -25,6 +25,10 @@ body {
     width: 800px;
     margin-top: 10px !important;
   }
+
+  #backgroundStripes {
+    display: none !important;
+  }
 }
 
 #App-header {
