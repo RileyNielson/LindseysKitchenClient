@@ -662,7 +662,7 @@ ol {
   }
 
   .card {
-    min-width: 50px;
+    min-width: 100px;
     max-width: 200px;
   }
 
