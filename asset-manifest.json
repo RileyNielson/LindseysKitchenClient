@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://lindseyskitchen.com/static/css/main.3eed0b8e.css",
+    "main.css": "https://lindseyskitchen.com/static/css/main.ff167c26.css",
     "main.js": "https://lindseyskitchen.com/static/js/main.cb8e42e5.js",
     "static/js/787.c4e7f8f9.chunk.js": "https://lindseyskitchen.com/static/js/787.c4e7f8f9.chunk.js",
     "index.html": "https://lindseyskitchen.com/index.html",
-    "main.3eed0b8e.css.map": "https://lindseyskitchen.com/static/css/main.3eed0b8e.css.map",
+    "main.ff167c26.css.map": "https://lindseyskitchen.com/static/css/main.ff167c26.css.map",
     "main.cb8e42e5.js.map": "https://lindseyskitchen.com/static/js/main.cb8e42e5.js.map",
     "787.c4e7f8f9.chunk.js.map": "https://lindseyskitchen.com/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3eed0b8e.css",
+    "static/css/main.ff167c26.css",
     "static/js/main.cb8e42e5.js"
   ]
 }
