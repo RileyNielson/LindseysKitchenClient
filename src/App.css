@@ -638,7 +638,7 @@ ol {
     display: flex;
     width: 100%;
     height: 40px;
-    margin-top: 40px;
+    margin-top: 20px;
     justify-content: center;
   }
 
@@ -661,13 +661,31 @@ ol {
   }
 
   .card {
-    min-width: 100px;
-    max-width: 100px;
-    height: 100px;
+    min-width: 150px;
+    max-width: 150px;
+    height: 150px;
   }
 
   #recipeContainer h2 {
     padding: 0px 10px;
+  }
+
+  #recipeContainer {
+    width: 80%;
+  }
+
+  #printButton {
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 30px;
+    position: absolute;
+    right: 10px;
+    color: #5f5f5f;
+    border-radius: 10px;
+    top: 0px;
   }
 
 }
