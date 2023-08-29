@@ -611,6 +611,7 @@ ol {
 
   #searchContainer:focus-within {
     width: 200px;
+    border: rgb(203, 203, 203) solid 2px;
   }
 
   #searchBar {
