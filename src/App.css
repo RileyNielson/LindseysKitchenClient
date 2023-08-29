@@ -648,23 +648,20 @@ ol {
   #cardContainer {
     position: absolute;
     z-index: -1;
-    /* background-color: white; */
     width: 92%;
     height: 95%;
     overflow-y: scroll;
-    /* border: white 5px solid; */
-    /* box-shadow: 0px 0px 10px #282c34; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
   .card {
-    min-width: none;
-    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
     height: 80px;
   }
 
