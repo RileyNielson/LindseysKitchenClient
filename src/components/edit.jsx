@@ -15,32 +15,6 @@ function Edit(props) {
 
   const recipes = props.recipes;
 
-  // This method fetches the records from the database.
-  useEffect(() => {
-    
-    async function getRecipes() {
-      const response = await fetch(`https://lindseyskitchenapi.onrender.com/recipes`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const recip = await response.json();
-
-      props.setRecipes(() => {
-        document.querySelector("#loadCircle") &&
-          document.querySelector("#loadCircle").classList.add("hidden");
-        return recip;
-      });
-    }
-
-    getRecipes();
-
-    return;
-  }, [recipes, props]);
-
   useEffect(() => {
     if (props.filter === "Catagories") {
       if (props.chosenFilter === "ShowAll") {
