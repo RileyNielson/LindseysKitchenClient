@@ -51,7 +51,7 @@ function Recipe(props) {
     return (
       <div id="recipeDisplay">
         <div id="backgroundStripes">
-        <div className="stripe grey"></div>
+        <div className="stripe teal"></div>
         <div className="stripe teal"></div>
         <div className="stripe grey"></div>
         <div className="stripe teal"></div>

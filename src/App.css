@@ -77,7 +77,7 @@ body {
   align-items: center;
   margin-bottom: 15px;
   border-radius: 5px;
-} 
+}
 
 #searchBar {
   width: 85%;
@@ -551,9 +551,7 @@ ol {
   align-items: center;
 }
 
-
 @media screen and (max-width: 768px) {
-
   body {
     overflow-y: none;
   }
@@ -568,7 +566,7 @@ ol {
     justify-content: centerf;
     align-items: flex-end;
   }
-  
+
   #logoImg {
     min-width: 0;
     width: 250px;
@@ -675,6 +673,10 @@ ol {
     width: 95%;
   }
 
+  #backButton {
+    left: 5px;
+  }
+
   #printButton {
     margin-left: 10px;
     width: 30px;
@@ -683,10 +685,9 @@ ol {
     text-align: center;
     font-size: 25px;
     position: absolute;
-    right: 0px;
+    right: 5px;
     color: #5f5f5f;
     border-radius: 10px;
     top: 0px;
   }
-
 }
