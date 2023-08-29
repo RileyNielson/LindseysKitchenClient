@@ -663,6 +663,7 @@ ol {
   }
 
   .card {
+    min-width: none;
     width: 80px;
     height: 80px;
   }
