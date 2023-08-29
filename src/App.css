@@ -22,7 +22,7 @@ body {
   }
 
   #App-main {
-    width: 100%;
+    width: 100% !important;
     display: flex !important;
     justify-content: center !important;
   }
@@ -686,7 +686,7 @@ ol {
   }
 
   #backButton {
-    top: 120px;
+    top: 135px;
     left: 5px;
   }
 
