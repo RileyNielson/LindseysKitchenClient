@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import CatagoryInput from "./catagoryInput";
 import stockImage from "./stockImage";
-import AWS from 'aws-sdk'
-
 
 function Create(props) {
   const [recipe, setRecipe] = useState({
@@ -20,11 +18,6 @@ function Create(props) {
   const [idMessage, setIdMessage] = useState("Click Me To Upload Image");
 
   const navigate = useNavigate();
-
-  const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
-  })
 
   // These methods will update the state properties.
   function updateRecipe(e) {
@@ -105,52 +98,28 @@ function Create(props) {
 
   function imageUploaded(e) {
     let file = document.querySelector("input[type=file]")["files"][0];
-    
-    // let reader = new FileReader();
+
     console.log(file);
-    var blob = file.getAsFile();
+    let reader = new FileReader();
 
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `${blob}.jpg`,
-      Body: blob
-    
-    }
-    
-    
-    var dataLocation;
+    console.log(file.name);
+    setIdMessage("Image " + file.name + " Added");
 
-    s3.upload(params, (err, data) => {
-      if (err) {
-        console.log("file Not uploaded");
-        //reject(err)
-      }
-      //resolve(data.Location)
-      dataLocation = data.Location
-    })
-    
-    console.log(dataLocation);
+    reader.onload = function () {
+      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
 
-    
+      console.log(reader.result);
+      //imageBase64Stringsep = base64String;
 
+      // alert(imageBase64Stringsep);
+      console.log(base64String);
+      return setRecipe((prev) => {
+        return { ...prev, photos: "data:image/png;base64," + base64String };
+      });
+    };
+    reader.readAsDataURL(file);
 
-    // console.log(file.name);
-    // setIdMessage("Image " + file.name + " Added");
-
-    // reader.onload = function () {
-    //   base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
-    //   //imageBase64Stringsep = base64String;
-
-    //   // alert(imageBase64Stringsep);
-    //   console.log(base64String);
-    //   return setRecipe((prev) => {
-    //     return { ...prev, photos: "data:image/png;base64," + base64String };
-    //   });
-    // };
-    // reader.readAsDataURL(file);
-
-    // console.log(base64String);
+    console.log(base64String);
   }
 
   return (
