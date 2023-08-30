@@ -31,8 +31,7 @@ export default function CatagoryInput(props) {
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 0, width: 275, height:30, padding:0}}>
+      <FormControl sx={{ m: 0, width: "100%", height:25, padding:0}}>
         <InputLabel></InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -44,16 +43,15 @@ export default function CatagoryInput(props) {
           input={<OutlinedInput/>}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
-          style={{height:30}}
+          style={{height:25, width:"100%", maxWidth:300}}
         >
           {props.catagories.map((name) => (
-            <MenuItem key={name} value={name} sx={{height:"20px", minHeight:0, width:"50px"}}>
+            <MenuItem key={name} value={name} sx={{height:"25px", minHeight:0, width:"50px"}}>
               <Checkbox checked={props.catagoryValues.indexOf(name) > -1} />
               <ListItemText primary={name} sx={{padding:0, width:"50"}}/>
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </div>
   );
 }

@@ -15,7 +15,7 @@ function Create(props) {
     notes: "",
     photos: stockImage,
   });
-  const [idMessage, setIdMessage] = useState("Click Me To Upload Image");
+  const [idMessage, setIdMessage] = useState("Click to Upload Image");
 
   const navigate = useNavigate();
 
@@ -139,7 +139,7 @@ function Create(props) {
             />
           </div>
           <div className="spacer">
-            <p className="tag">Categories</p>
+            <p className="tag">Category</p>
             <CatagoryInput
               name="catagories"
               catagoryValues={recipe.catagories}
