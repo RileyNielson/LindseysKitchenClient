@@ -187,7 +187,6 @@ body {
 }
 
 #searchStrip {
-  /* background-color: rgb(255, 255, 255); */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   height: 65px;
@@ -206,7 +205,7 @@ body {
   display: flex;
   width: 100%;
   height: 40px;
-  margin-top: 40px;
+  margin-top: 30px;
   justify-content: center;
 }
 
@@ -249,17 +248,14 @@ body {
 #cardContainer {
   position: absolute;
   z-index: -1;
-  /* background-color: white; */
   width: 80%;
   height: 100%;
   overflow-y: scroll;
-  /* border: white 5px solid; */
-  /* box-shadow: 0px 0px 10px #282c34; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-start;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 

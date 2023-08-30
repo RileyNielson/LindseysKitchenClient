@@ -21,7 +21,18 @@ function Home(props) {
         getCatagories(recipes);
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
-      } else if (props.catagories.includes(props.chosenFilter)) {
+      } else if (props.chosenFilter === "All") {
+        document.querySelector("#loadCircle").classList.add("hidden");
+        document.getElementById("backButton").classList.remove("hidden");
+        document.getElementById("catagoryTitle").classList.remove("hidden");
+        console.log(catagory);
+        setShowCatagories(() => {
+          return recipes.filter(
+            (r) =>
+              r.catagories.includes(catagory)
+          );
+        });
+      }else if (props.catagories.includes(props.chosenFilter)) {
         setCatagory(props.chosenFilter);
         getTags(
           recipes.filter((r) => r.catagories.includes(props.chosenFilter))
@@ -93,7 +104,7 @@ function Home(props) {
         length: rec.length,
       };
 
-      shownTags.push(...allTags);
+      shownTags.push(allTags);
 
       setShowCatagories(shownTags);
     }

@@ -11,14 +11,14 @@ export default function TitlebarImageList(props) {
     !props.catagories.includes(props.chosenFilter)
   ) {
     showingCatagories = props.showCatagories;
+  } else if (props.chosenFilter === "All"){
+    showingCatagories = props.showCatagories;
   }
 
   function handleClick(item) {
     if (props.chosenFilter === "ShowAll") {
       props.setChosenFilter(item.title);
-    } else if (props.chosenFilter === "All") {
-      props.setChosenFilter(item.title);
-    }else if (props.catagories.includes(props.chosenFilter)) {
+    }else if (props.catagories.includes(props.chosenFilter) && props.chosenFilter !== "All") {
       props.setChosenFilter(item.title);
     } else {
       showingCatagories = props.showCatagories;
