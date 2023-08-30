@@ -21,6 +21,14 @@ function Edit(props) {
         getCatagories(recipes);
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
+      } else if (props.chosenFilter === "All") {
+        document.querySelector("#loadCircle").classList.add("hidden");
+        document.getElementById("backButton").classList.remove("hidden");
+        document.getElementById("catagoryTitle").classList.remove("hidden");
+        console.log(catagory);
+        setShowCatagories(() => {
+          return recipes.filter((r) => r.catagories.includes(catagory));
+        });
       } else if (props.catagories.includes(props.chosenFilter)) {
         setCatagory(props.chosenFilter);
         getTags(
@@ -87,11 +95,27 @@ function Edit(props) {
         }
       });
 
+      const allTags = {
+        title: "All",
+        photos: rec[0].photos,
+        length: rec.length,
+      };
+
+      shownTags.push(allTags);
+
       setShowCatagories(shownTags);
     }
 
     return;
-  }, [props.chosenFilter, props.catagories, catagory, props.filter, props.tags, recipes, setCatagory]);
+  }, [
+    props.chosenFilter,
+    props.catagories,
+    catagory,
+    props.filter,
+    props.tags,
+    recipes,
+    setCatagory,
+  ]);
 
   function backFunction() {
     setFilter("Catagories");
@@ -124,7 +148,9 @@ function Edit(props) {
         catagories={props.catagories}
       />
       <div id="loadCircle" className="loadCircle">
-        <CircularProgress sx={{ position:"absolute", top:"35%", color: "grey" }} />
+        <CircularProgress
+          sx={{ position: "absolute", top: "35%", color: "grey" }}
+        />
       </div>
       <div
         id="backButton"
