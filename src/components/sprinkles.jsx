@@ -88,7 +88,7 @@ const sprinkles = [
   {
     top: "42vh",
     left: "5vw",
-    rotation: "135deg",
+    rotation: "133deg",
     color: "rgba(227, 165, 140, 0.5)",
   },
   {
