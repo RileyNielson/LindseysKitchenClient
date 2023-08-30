@@ -89,8 +89,8 @@ function Home(props) {
 
       const allTags = {
         title: "All",
-        photos: newArray[0].photos,
-        length: newArray.length,
+        photos: rec[0].photos,
+        length: rec.length,
       };
 
       shownTags.push(...allTags);
