@@ -89,11 +89,11 @@ function Home(props) {
 
       const allTags = {
         title: "All",
-        photos: rec[0].photos,
+        photos: stockImage,
         length: rec.length,
       };
 
-      shownTags.push(allTags);
+      shownTags.push(...allTags);
 
       setShowCatagories(shownTags);
     }
