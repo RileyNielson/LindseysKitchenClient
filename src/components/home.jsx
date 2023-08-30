@@ -76,7 +76,7 @@ function Home(props) {
 
     async function getTags(rec) {
       const shownTags = props.tags.map((c) => {
-        var newArray = rec.filter((r) => r.tags.includes(c));
+        var newArray = rec.filter((r) => r.tags.includes(c) || r.tags.length === 0);
         if (newArray.length > 0) {
           return {
             title: c,
