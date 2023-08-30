@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://lindseyskitchen.com/static/css/main.6fe2a4b5.css",
-    "main.js": "https://lindseyskitchen.com/static/js/main.8d36fd94.js",
+    "main.css": "https://lindseyskitchen.com/static/css/main.36be20d4.css",
+    "main.js": "https://lindseyskitchen.com/static/js/main.6492c12d.js",
     "static/js/787.c4e7f8f9.chunk.js": "https://lindseyskitchen.com/static/js/787.c4e7f8f9.chunk.js",
     "index.html": "https://lindseyskitchen.com/index.html",
-    "main.6fe2a4b5.css.map": "https://lindseyskitchen.com/static/css/main.6fe2a4b5.css.map",
-    "main.8d36fd94.js.map": "https://lindseyskitchen.com/static/js/main.8d36fd94.js.map",
+    "main.36be20d4.css.map": "https://lindseyskitchen.com/static/css/main.36be20d4.css.map",
+    "main.6492c12d.js.map": "https://lindseyskitchen.com/static/js/main.6492c12d.js.map",
     "787.c4e7f8f9.chunk.js.map": "https://lindseyskitchen.com/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6fe2a4b5.css",
-    "static/js/main.8d36fd94.js"
+    "static/css/main.36be20d4.css",
+    "static/js/main.6492c12d.js"
   ]
 }
