@@ -15,7 +15,6 @@ function Home(props) {
 
   const recipes = props.recipes;
 
-
   useEffect(() => {
     if (props.filter === "Catagories") {
       if (props.chosenFilter === "ShowAll") {
@@ -88,20 +87,13 @@ function Home(props) {
         }
       });
 
-      const noTags = props.tags.map((c) => {
-        var newArray = rec.filter((r) => r.tags.length === 0);
-        if (newArray.length > 0) {
-          return {
-            title: "Other",
-            photos: newArray[0].photos,
-            length: newArray.length,
-          };
-        } else {
-          return { title: c, photos: stockImage, length: 0 };
-        }
-      });
+      const allTags = {
+        title: "All",
+        photos: newArray[0].photos,
+        length: newArray.length,
+      };
 
-      shownTags.push(noTags)
+      shownTags.push(...allTags);
 
       setShowCatagories(shownTags);
     }
@@ -156,7 +148,9 @@ function Home(props) {
         catagories={props.catagories}
       />
       <div id="loadCircle" className="loadCircle">
-        <CircularProgress sx={{ position:"absolute", top:"35%", color: "grey" }} />
+        <CircularProgress
+          sx={{ position: "absolute", top: "35%", color: "grey" }}
+        />
       </div>
       <div
         id="backButton"
