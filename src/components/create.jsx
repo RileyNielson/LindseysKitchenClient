@@ -35,7 +35,7 @@ function Create(props) {
     const newRecipe = { ...recipe };
     console.log(newRecipe);
 
-    await fetch("http://localhost:5050/recipes", {
+    await fetch("https://lindseyskitchenapi.onrender.com/recipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

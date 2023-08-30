@@ -25,7 +25,7 @@ function EditRecipe(props) {
     const editedRecipe = {...recipe};
     console.log(editedRecipe);
 
-    await fetch(`http://localhost:5050/recipes/${props.recipe._id}`, {
+    await fetch(`https://lindseyskitchenapi.onrender.com/recipes/${props.recipe._id}`, {
       method: "PATCH",
       body: JSON.stringify(editedRecipe),
       headers: {

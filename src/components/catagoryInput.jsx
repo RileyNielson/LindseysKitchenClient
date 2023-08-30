@@ -47,9 +47,9 @@ export default function CatagoryInput(props) {
           style={{height:30}}
         >
           {props.catagories.map((name) => (
-            <MenuItem key={name} value={name}>
+            <MenuItem key={name} value={name} sx={{height:"20px", minHeight:0, width:"50px"}}>
               <Checkbox checked={props.catagoryValues.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+              <ListItemText primary={name} sx={{padding:0, width:"50"}}/>
             </MenuItem>
           ))}
         </Select>
