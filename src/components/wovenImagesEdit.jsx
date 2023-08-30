@@ -11,6 +11,8 @@ export default function WovenImagesEdit(props) {
     !props.catagories.includes(props.chosenFilter)
   ) {
     showingCatagories = props.showCatagories;
+  } else if (props.chosenFilter === "All") {
+    showingCatagories = props.showCatagories;
   }
 
   function handleClick(item) {
