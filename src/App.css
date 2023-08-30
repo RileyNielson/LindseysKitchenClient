@@ -680,6 +680,14 @@ ol {
     padding: 0px 10px;
   }
 
+  #recipeContainer div {
+    margin-top: 20px;
+    border-radius: 5px;
+    height: fit-content;
+    width: 95%;
+    max-width: 700px;
+  }
+
   #recipeContainer {
     width: 95%;
   }
