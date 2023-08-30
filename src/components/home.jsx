@@ -76,7 +76,7 @@ function Home(props) {
 
     async function getTags(rec) {
       const shownTags = props.tags.map((c) => {
-        var newArray = rec.filter((r) => r.tags.includes(c) || r.tags.length === 0);
+        var newArray = rec.filter((r) => r.tags.includes(c));
         if (newArray.length > 0) {
           return {
             title: c,
@@ -87,6 +87,21 @@ function Home(props) {
           return { title: c, photos: stockImage, length: 0 };
         }
       });
+
+      const noTags = props.tags.map((c) => {
+        var newArray = rec.filter((r) => r.tags.length === 0);
+        if (newArray.length > 0) {
+          return {
+            title: "Other",
+            photos: newArray[0].photos,
+            length: newArray.length,
+          };
+        } else {
+          return { title: c, photos: stockImage, length: 0 };
+        }
+      });
+
+      shownTags.push(noTags)
 
       setShowCatagories(shownTags);
     }
