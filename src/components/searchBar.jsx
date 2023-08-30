@@ -36,7 +36,6 @@ function SearchBar(props) {
     console.log(e.id);
     props.setRecipe(item[0]);
     setSearchRec(searchRecipes);
-    setSearchVal("");
     document.getElementById("searchContents").classList.add("hidden");
     document.getElementById("searchInput").placeholder = "Search...";
     if (window.location.pathname === "/edit") {
@@ -44,6 +43,7 @@ function SearchBar(props) {
     } else {
       navigate("/recipe");
     }
+    setSearchVal("");
   }
 
   function openSearch(e) {
