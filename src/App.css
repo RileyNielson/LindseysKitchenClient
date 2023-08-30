@@ -659,7 +659,7 @@ ol {
     height: auto;
     top: 100px;
     bottom: 0px;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
     overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
