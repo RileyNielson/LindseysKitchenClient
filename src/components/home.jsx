@@ -93,7 +93,7 @@ function Home(props) {
         length: rec.length,
       };
 
-      shownTags.push(...allTags);
+      shownTags.push(allTags);
 
       setShowCatagories(shownTags);
     }
