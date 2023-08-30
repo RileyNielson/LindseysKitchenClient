@@ -524,6 +524,8 @@ ol {
 
 #pasteImage {
   /* border: 2px solid #282c34; */
+  border: 0;
+  border-top: 2px solid grey;
   background: transparent;
   font-size: 30px;
   display: flex;
@@ -640,6 +642,7 @@ ol {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
   }
 
   #catagoryTitle {
@@ -803,12 +806,15 @@ ol {
   }
 
   #submitButton {
-    background-color: #282c34;
+    background-color: #747474;
     color: white;
     width: 200px;
+    height: 35px;
     border-radius: 10px;
+    border: 0;
     font-size: 30px;
-    margin: 10px;
+    margin: 15px;
     margin-bottom: 20px;
+    cursor: pointer;
   }
 }

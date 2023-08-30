@@ -188,7 +188,7 @@ function Create(props) {
               name="ingredients"
               id="ingredients"
               className="createText"
-              placeholder="Add Ingredients Here"
+              placeholder="Add Ingredients"
               value={recipe.ingredients}
               onChange={updateRecipe}
             />
@@ -201,7 +201,7 @@ function Create(props) {
               name="instructions"
               id="instructions"
               className="createText"
-              placeholder="Add Instructions Here"
+              placeholder="Add Instructions"
               value={recipe.instructions}
               onChange={updateRecipe}
             />
@@ -212,7 +212,7 @@ function Create(props) {
               name="notes"
               id="notes"
               className="createText"
-              placeholder="Add Notes Here"
+              placeholder="Add Notes"
               value={recipe.notes}
               onChange={updateRecipe}
             />
@@ -227,9 +227,9 @@ function Create(props) {
                 style={{ display: "none" }}
                 onChange={(event) => imageUploaded(event)}
               />
-              <label for="fileId">{idMessage}</label>
+              <label for="fileId" style={{fontFamily:"arial", fontSize:"18px"}}>{idMessage}</label>
               <input
-                placeholder="ctrl + v to paste image"
+                placeholder="Ctrl+V to paste image"
                 type="text"
                 id="pasteImage"
                 onPaste={handlePaste}
