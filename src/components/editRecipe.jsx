@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import CatagoryInput from "./catagoryInput";
+import uploadPhoto from "./uploadPhoto";
 
 function EditRecipe(props) {
   const [recipe, setRecipe] = useState(props.recipe);
   const [idMessage, setIdMessage] = useState("Click Me To Upload Image");
+  const [photo, setPhoto] = useState(null);
 
   const navigate = useNavigate();
 
@@ -21,23 +23,28 @@ function EditRecipe(props) {
   async function onSubmit(e) {
     e.preventDefault();
 
+    uploadPhoto(photo);
+    const photoUrl =
+      "https://lindseyskitchenphotos.s3.us-west-1.amazonaws.com/" + photo.name;
+
     // When a post request is sent to the create url, we'll add a new record to the database.
-    const editedRecipe = {...recipe};
+    const editedRecipe = { ...recipe, photos: photoUrl };
     console.log(editedRecipe);
 
-    await fetch(`https://lindseyskitchenapi.onrender.com/recipes/${props.recipe._id}`, {
-      method: "PATCH",
-      body: JSON.stringify(editedRecipe),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    await fetch(
+      `https://lindseyskitchenapi.onrender.com/recipes/${props.recipe._id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(editedRecipe),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     setRecipe(editedRecipe);
     navigate("/");
   }
-
-  let base64String = "";
 
   function handlePaste(event) {
     const clipboardItems = event.clipboardData.items;
@@ -52,49 +59,18 @@ function EditRecipe(props) {
     const item = items[0];
     if (item.kind === "file") {
       var blob = item.getAsFile();
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        console.log(event.target.result);
-        base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
-        //imageBase64Stringsep = base64String;
-
-        // alert(imageBase64Stringsep);
-        console.log(base64String);
-
-        return setRecipe((prev) => {
-          return { ...prev, photos: "data:image/png;base64," + base64String };
-        });
-      };
-      // data url!
-      reader.readAsDataURL(blob);
-      event.target.value = "Image Added";
-      setIdMessage("Image Added");
+      setPhoto(blob);
     }
   }
 
-  function imageUploaded(e) {
-    let file = document.querySelector("input[type=file]")["files"][0];
-
-    let reader = new FileReader();
-    console.log(file.name);
-    setIdMessage("Image " + file.name + " Added");
-
-    reader.onload = function () {
-      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
-      //imageBase64Stringsep = base64String;
-
-      // alert(imageBase64Stringsep);
-      console.log(base64String);
-      return setRecipe((prev) => {
-        return { ...prev, photos: "data:image/png;base64," + base64String };
-      });
-    };
-    reader.readAsDataURL(file);
-
-    console.log(base64String);
-  }
+  // Function to handle photo and store it to photo state
+  const handlePhotoChange = (e) => {
+    // Uploaded Photo
+    const photo = e.target.files[0];
+    // Changing file state
+    setIdMessage(photo.name + " Uploaded");
+    setPhoto(photo);
+  };
 
   return (
     <div id="App-main">
@@ -199,7 +175,7 @@ function EditRecipe(props) {
                 type="file"
                 name="photos"
                 style={{ display: "none" }}
-                onChange={(event) => imageUploaded(event)}
+                onChange={handlePhotoChange}
               />
               <label for="fileId">{idMessage}</label>
               <input

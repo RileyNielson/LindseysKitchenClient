@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import CatagoryInput from "./catagoryInput";
 import stockImage from "./stockImage";
+import uploadPhoto from "./uploadPhoto";
 
 function Create(props) {
   const [recipe, setRecipe] = useState({
@@ -16,6 +17,7 @@ function Create(props) {
     photos: stockImage,
   });
   const [idMessage, setIdMessage] = useState("Click to Upload Image");
+  const [photo, setPhoto] = useState(null);
 
   const navigate = useNavigate();
 
@@ -31,8 +33,13 @@ function Create(props) {
   async function onSubmit(e) {
     e.preventDefault();
 
+    uploadPhoto(photo);
+    const photoUrl =
+      "https://lindseyskitchenphotos.s3.us-west-1.amazonaws.com/" + photo.name;
+
+    console.log(photoUrl);
     // When a post request is sent to the create url, we'll add a new record to the database.
-    const newRecipe = { ...recipe };
+    const newRecipe = { ...recipe, photos: photoUrl };
     console.log(newRecipe);
 
     await fetch("https://lindseyskitchenapi.onrender.com/recipes", {
@@ -60,7 +67,7 @@ function Create(props) {
     navigate("/");
   }
 
-  let base64String = "";
+  // let base64String = "";
 
   function handlePaste(event) {
     const clipboardItems = event.clipboardData.items;
@@ -75,52 +82,18 @@ function Create(props) {
     const item = items[0];
     if (item.kind === "file") {
       var blob = item.getAsFile();
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        console.log(event.target.result);
-        base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
-        //imageBase64Stringsep = base64String;
-
-        // alert(imageBase64Stringsep);
-        console.log(base64String);
-
-        return setRecipe((prev) => {
-          return { ...prev, photos: "data:image/png;base64," + base64String };
-        });
-      };
-      // data url!
-      reader.readAsDataURL(blob);
-      event.target.value = "Image Added";
-      setIdMessage("Image Added");
+      setPhoto(blob);
     }
   }
 
-  function imageUploaded(e) {
-    let file = document.querySelector("input[type=file]")["files"][0];
-
-    console.log(file);
-    let reader = new FileReader();
-
-    console.log(file.name);
-    setIdMessage("Image " + file.name + " Added");
-
-    reader.onload = function () {
-      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
-      console.log(reader.result);
-      //imageBase64Stringsep = base64String;
-
-      // alert(imageBase64Stringsep);
-      console.log(base64String);
-      return setRecipe((prev) => {
-        return { ...prev, photos: "data:image/png;base64," + base64String };
-      });
-    };
-    reader.readAsDataURL(file);
-
-    console.log(base64String);
-  }
+  // Function to handle photo and store it to photo state
+  const handlePhotoChange = (e) => {
+    // Uploaded Photo
+    const photo = e.target.files[0];
+    // Changing file state
+    setIdMessage(photo.name + " Uploaded");
+    setPhoto(photo);
+  };
 
   return (
     <div id="App-main">
@@ -220,14 +193,16 @@ function Create(props) {
           <div id="addDirections">
             <p style={{ margin: 0, marginTop: 10, marginBottom: 10 }}>Photos</p>
             <div className="createText">
-              <input
-                id="fileId"
-                type="file"
-                name="photos"
-                style={{ display: "none" }}
-                onChange={(event) => imageUploaded(event)}
-              />
-              <label for="fileId" style={{fontFamily:"arial", fontSize:"18px"}}>{idMessage}</label>
+              <label style={{ fontFamily: "arial", fontSize: "18px" }}>
+                <input
+                  id="fileId"
+                  type="file"
+                  name="photoUpload"
+                  style={{ display: "none" }}
+                  onChange={handlePhotoChange}
+                />
+                {idMessage}
+              </label>
               <input
                 placeholder="Ctrl+V to paste image"
                 type="text"
