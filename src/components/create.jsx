@@ -33,9 +33,10 @@ function Create(props) {
   async function onSubmit(e) {
     e.preventDefault();
 
-    uploadPhoto(photo);
+    uploadPhoto(photo, recipe);
+
     const photoUrl =
-      "https://lindseyskitchenphotos.s3.us-west-1.amazonaws.com/" + photo.name;
+      "https://lindseyskitchenphotos.s3.us-west-1.amazonaws.com/" + recipe.title;
 
     console.log(photoUrl);
     // When a post request is sent to the create url, we'll add a new record to the database.

@@ -1,7 +1,7 @@
 import AWS from "aws-sdk";
 
 // Function to upload Photo to s3
-async function uploadPhoto(photo){
+async function uploadPhoto(photo, recipe){
   // S3 Bucket Name
   const S3_BUCKET = "lindseyskitchenphotos";
   console.log(process.env.AWS_S3_ACCESS_KEY_ID);
@@ -23,7 +23,7 @@ async function uploadPhoto(photo){
   // Photos Parameters
   const params = {
     Bucket: S3_BUCKET,
-    Key: photo.name,
+    Key: recipe.title,
     Body: photo,
   };
   console.log(params);
