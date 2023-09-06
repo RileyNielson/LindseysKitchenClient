@@ -83,6 +83,8 @@ function Create(props) {
     const item = items[0];
     if (item.kind === "file") {
       var blob = item.getAsFile();
+
+      document.getElementById("pasteImage").value = "Image Added"
       setPhoto(blob);
     }
   }
