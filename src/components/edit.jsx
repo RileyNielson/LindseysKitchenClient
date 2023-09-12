@@ -44,8 +44,8 @@ function Edit(props) {
         setShowCatagories(() => {
           return recipes.filter(
             (r) =>
-              r.tags.includes(props.chosenFilter) &&
-              r.catagories.includes(catagory)
+              r.catagories.includes(catagory) &&
+              r.tags.includes(props.chosenFilter)
           );
         });
       }
@@ -54,6 +54,11 @@ function Edit(props) {
         getTags(recipes);
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
+      } else if (props.chosenFilter === "All") {
+        document.querySelector("#loadCircle").classList.add("hidden");
+        document.getElementById("backButton").classList.remove("hidden");
+        document.getElementById("catagoryTitle").classList.remove("hidden");
+        setShowCatagories(recipes);
       } else {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
@@ -95,17 +100,19 @@ function Edit(props) {
         }
       });
 
-      const allTags = {
-        title: "All",
-        photos: rec[0].photos,
-        length: rec.length,
-      };
-
-      shownTags.push(allTags);
+      if (rec.length > 0) {
+        const allTags = {
+          title: "All",
+          photos: rec[0].photos,
+          length: rec.length,
+        };
+        shownTags.push(allTags);
+      }
 
       setShowCatagories(shownTags);
     }
 
+    console.log("Catagories Updating");
     return;
   }, [
     props.chosenFilter,
