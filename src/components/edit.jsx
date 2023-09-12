@@ -127,7 +127,7 @@ function Edit(props) {
   function backFunction() {
     setFilter("Catagories");
     props.setChosenFilter("ShowAll");
-    navigate("/");
+    navigate("/edit");
   }
 
   console.log(recipes);

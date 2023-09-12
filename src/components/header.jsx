@@ -23,7 +23,7 @@ function HeaderBar(props) {
       props.setFilter("Catagories")
       document.getElementById("TagsFilter").classList.remove("activeFilterButton")
     }
-    window.location.pathname === "edit" ? navigate("/edit") : navigate("/");
+    window.location.pathname === "/edit" ? navigate("/edit") : navigate("/");
   }
 
   return (
