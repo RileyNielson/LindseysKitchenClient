@@ -82,7 +82,7 @@ function Home(props) {
           return { title: c, photos: stockImage, length: 0 };
         }
       });
-
+      document.querySelector("#loadCircle").classList.add("hidden");
       setShowCatagories(shownCatagories);
     }
 
@@ -108,7 +108,7 @@ function Home(props) {
         };
         shownTags.push(allTags);
       }
-
+      document.querySelector("#loadCircle").classList.add("hidden");
       setShowCatagories(shownTags);
     }
 
