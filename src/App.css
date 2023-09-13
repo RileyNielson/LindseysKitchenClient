@@ -684,6 +684,14 @@ ol {
     height: 150px;
   }
 
+  .card div {
+    height: fit-content;
+  }
+
+  .card p {
+    margin: 5px;
+  }
+
   #recipeContainer h2 {
     padding: 0px 10px;
   }
