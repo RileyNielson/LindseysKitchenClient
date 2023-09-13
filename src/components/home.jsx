@@ -21,6 +21,7 @@ function Home(props) {
         getCatagories(recipes);
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
+        document.querySelector("#loadCircle").classList.add("hidden");
       } else if (props.chosenFilter === "All") {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
@@ -52,6 +53,7 @@ function Home(props) {
     } else if (props.filter === "Tags") {
       if (props.chosenFilter === "ShowAll") {
         getTags(recipes);
+        document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
       } else if (props.chosenFilter === "All") {
@@ -82,7 +84,6 @@ function Home(props) {
           return { title: c, photos: stockImage, length: 0 };
         }
       });
-      document.querySelector("#loadCircle").classList.add("hidden");
       setShowCatagories(shownCatagories);
     }
 
@@ -108,7 +109,6 @@ function Home(props) {
         };
         shownTags.push(allTags);
       }
-      document.querySelector("#loadCircle").classList.add("hidden");
       setShowCatagories(shownTags);
     }
 
