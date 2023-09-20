@@ -67,7 +67,7 @@ function Recipe(props) {
             <h3>Ingredients</h3>
             <ul
               id="ingredients"
-              style={{ columns: ingredients.length > 7 ? 2 : 1 }}
+              style={{ listStyleType:"none", columns: ingredients.length > 7 && window.innerWidth > 660 ? 2 : 1  }}
             >
               {ingredients.map((i) => (
                 <li>{i}</li>
@@ -76,7 +76,7 @@ function Recipe(props) {
           </div>
           <div>
             <h3>Instructions</h3>
-            <ol>
+            <ol style={{ listStyleType:"none" }}>
               {instructions.map((i) => (
                 <li>{i}</li>
               ))}
