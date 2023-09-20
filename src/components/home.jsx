@@ -21,7 +21,6 @@ function Home(props) {
         getCatagories(recipes);
         document.getElementById("catagoryTitle").classList.add("hidden");
         document.getElementById("backButton").classList.add("hidden");
-        document.querySelector("#loadCircle").classList.add("hidden");
       } else if (props.chosenFilter === "All") {
         document.querySelector("#loadCircle").classList.add("hidden");
         document.getElementById("backButton").classList.remove("hidden");
