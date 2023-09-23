@@ -3,7 +3,7 @@ import AWS from "aws-sdk";
 // Function to upload Photo to s3
 async function uploadPhoto(photo, recipe){
   // S3 Bucket Name
-  const S3_BUCKET = "lindseyskitchenphotos";
+  const S3_BUCKET = process.env.AWS_BUCKET_NAME;
   console.log(process.env.AWS_S3_ACCESS_KEY_ID);
 
   // S3 Region
@@ -11,8 +11,8 @@ async function uploadPhoto(photo, recipe){
 
   // S3 Credentials
   AWS.config.update({
-    accessKeyId: "AKIAZSSAMLGZM76KPS7P",
-    secretAccessKey: "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",
+    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
   });
 
   const s3 = new AWS.S3({
